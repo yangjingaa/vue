@@ -103,7 +103,7 @@
     <components is="child" ref="child"></components>
     <button type="button" @click="addState">我是一个修改</button>
     <button type="button" @click="addState">我是一个修改</button>
-    <button type="button">我是一个dev</button>
+    <button type="button">我是一个dev</button>gitadasd
   </div>
 </template>
 
