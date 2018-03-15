@@ -102,6 +102,7 @@
     <p>{{localeUpper | toUpperCase}}</p>
     <components is="child" ref="child"></components>
     <button type="button" @click="addState">我是一个修改</button>
+    <button type="button">我是一个dev</button>
   </div>
 </template>
 
