@@ -101,7 +101,7 @@
     <input type="text" v-model="get_name" placeholder="input">
     <p>{{localeUpper | toUpperCase}}</p>
     <components is="child" ref="child"></components>
-    <button type="button" @click="addState">啦啦啦啦啦</button>
+    <button type="button" @click="addState">我是一个修改</button>
   </div>
 </template>
 
@@ -148,9 +148,7 @@ import {mapGetters,mapMutations,mapActions} from "vuex"
       ...mapMutations(["set_name"]),
       ...mapActions(["setNameCount"]),
       addState(){
-        console.log(1)
         this.setNameCount(10)
-        console.log(2)
         let a = this.get_name;
         a++;
         console.log(a);
