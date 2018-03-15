@@ -103,7 +103,12 @@
     <components is="child" ref="child"></components>
     <button type="button" @click="addState">我是一个修改</button>
     <button type="button" @click="addState">我是一个修改</button>
+<<<<<<< HEAD
     <button type="button">我是一个dev</button>gitadasd
+=======
+    <button type="button" @click="addState">我是一个修改</button>
+    <button type="button">我是一个dev</button>
+>>>>>>> dec
   </div>
 </template>
 
