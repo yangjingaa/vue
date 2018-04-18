@@ -1,7 +1,8 @@
 const state={
   name:1,
   nameObject:{},
-  nameArray:[]
+  nameArray:[],
+  teacherInfo:{}
 };
 
 export default state;
