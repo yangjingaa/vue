@@ -47,9 +47,8 @@
         };
         sportMethod.login(data)
           .then((res) => {
-            console.log(res)
-            // dataMethod.setLocalData("user", res.data);
-            // this.$router.push("/home")
+            dataMethod.setLocalData("user", res.data);
+            this.$router.push("/home")
           })
           .catch((error) => {
             this.$message.error(error)

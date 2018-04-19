@@ -19,7 +19,7 @@ const resultCheck = (res) => {
  * 登录
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const login=()=>{
+export const login=(data)=>{
   return Axios.post("/sport/login", data)
     .then(res => {
       return resultCheck(res)
