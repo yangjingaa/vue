@@ -1,7 +1,6 @@
 <template>
    <div class="main">
      <div class="left">
-       <img src="./123.jpg" alt="">
        <div class="ulList">
          <ul class="list">
            <router-link :to="{name:'courseList'}" tag="li">老师开课记录</router-link>
@@ -29,7 +28,7 @@
 </template>
 
 <script>
-  import {requestMethod, dataMethod} from "../../service/index"
+  import {requestMethod, dataMethod} from "../../../service/index"
     export default {
         name: "home",
         data() {
@@ -62,5 +61,5 @@
 </script>
 
 <style lang="stylus" scoped>
-@import "./home.styl"
+@import "home.styl"
 </style>

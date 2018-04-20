@@ -19,6 +19,7 @@
 
 <script>
   import {sportMethod, dataMethod} from "../../../service/index"
+  import {mapMutations} from "vuex"
 
   export default {
     name: "login",
@@ -48,6 +49,7 @@
         sportMethod.login(data)
           .then((res) => {
             dataMethod.setLocalData("user", res.data);
+            this.set_user_info(res.data[0]);
             this.$router.push("/home")
           })
           .catch((error) => {
@@ -60,6 +62,8 @@
           this.$router.push("/home")
         }
       },
+      ...mapMutations(["set_user_info"])
+
     },
     components: {},
     watch: {}

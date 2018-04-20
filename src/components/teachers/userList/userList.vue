@@ -29,8 +29,8 @@
 </template>
 
 <script>
-  import {requestMethod} from "../../service/index"
-  import {getLocalData} from "../../service/tools"
+  import {requestMethod} from "../../../service/index"
+  import {getLocalData} from "../../../service/tools"
 
   export default {
     name: "user-list",

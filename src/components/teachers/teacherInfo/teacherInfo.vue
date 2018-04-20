@@ -95,8 +95,8 @@
 </template>
 
 <script>
-  import {requestMethod} from "../../service/index"
-  import {getLocalData} from "../../service/tools"
+  import {requestMethod} from "../../../service/index"
+  import {getLocalData} from "../../../service/tools"
 
   import {mapState, mapMutations, mapGetters} from 'vuex'
 
@@ -204,7 +204,7 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import "./teacherInfo.styl"
+  @import "teacherInfo.styl"
   .text {
     font-size: 14px;
   }

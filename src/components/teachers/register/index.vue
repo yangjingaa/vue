@@ -7,12 +7,15 @@
     <div class="input-value">
       <input type="text" placeholder="名字" v-model="name">
     </div>
+
     <div class="input-value">
       <input type="password" placeholder="请输入密码" v-model="pwd">
     </div>
     <div class="input-value">
       <input type="password" placeholder="请确认密码" v-model="repeatPwd">
     </div>
+
+
     <div class="footer">
       <el-button type="primary" @click="register" style="width :100%">注册</el-button>
     </div>
@@ -24,7 +27,7 @@
 </template>
 
 <script>
-  import {requestMethod,dataMethod} from "../../service/index"
+  import {requestMethod,dataMethod} from "../../../service/index"
     export default {
         name: "register",
         data() {
@@ -33,6 +36,11 @@
               userName:"yang",
               repeatPwd:123456,
               name:null,
+              address:"河北",
+              email:"517725252@qq.com",
+              age:15,
+              idCard:130152133644452369,
+              phoneNum:12366324568,
             }
         },
         created() {
@@ -44,7 +52,7 @@
         computed: {},
         methods: {
           register(){
-            const {pwd,userName,repeatPwd,name}=this;
+            const {pwd,userName,repeatPwd,name,address,email,age,idCard,phoneNum}=this;
             if(!pwd||!userName||!repeatPwd||!name){
               alert("数据不可为空");
               return false
@@ -55,7 +63,12 @@
             const data={
               userName,
               pwd,
-              name
+              name,
+              address,
+              email,
+              age,
+              idCard,
+              phoneNum
             };
             requestMethod.register(data)
               .then(res=>{
@@ -75,5 +88,5 @@
 </script>
 
 <style lang="stylus" scoped>
-@import "./register.styl"
+@import "register.styl"
 </style>

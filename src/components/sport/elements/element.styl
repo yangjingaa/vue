@@ -1,0 +1,88 @@
+.ele
+  .ele-top
+    padding-bottom 10px
+    border-bottom 1px solid #d9d9d9
+    &:after
+      display block
+      height 0
+      width 0
+      content " "
+      clear: both
+    .func-button
+      float right
+      margin-right 5px
+  .ele-detail
+    padding-top 10px
+    &>p
+      font-size 18px
+      color: #aeaeae
+    .list
+      padding-top 10px
+
+
+.addContent {
+  width 500px
+}
+  .addInput
+    margin-top 10px
+    display flex
+    justify-content center
+    span
+      display inline-block
+      width 80px
+      white-space nowrap
+      text-align right
+      line-height 40px
+
+
+
+.ele-box
+  display flex
+  justify-content space-around
+  align-content space-around
+  flex-wrap wrap
+  .ele-child
+    padding 5px
+    background #f3f0dd
+    flex: 0 0 300px
+    margin-bottom 10px
+    cursor: pointer
+    overflow hidden
+    .box
+      background #fff
+      .ele-img
+        height 195px
+        overflow hidden
+        img
+          width 100%
+          height auto
+          transition all 0.3s
+      .content
+        border-top 2px solid #f7ca7f
+        padding 10px 10px 30px
+        text-align center
+        transition all 0.5s
+        border-bottom 2px solid #f7ca7f
+        &:hover
+          background #fdf7ea
+        p
+          font-size 20px
+          color #131313
+          font-weight bold
+          font-family "Adobe Arabic"
+        .message
+          padding-top 15px
+          font-size 15px
+          color #111111
+          text-align left
+          text-indent:2em
+      .button
+        padding 10px
+        line-height 40px
+      .reservation
+        float right
+        .peo
+          color #d90f13
+          font-size 16px
+img:hover
+  transform  scale(1.2)

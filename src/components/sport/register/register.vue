@@ -2,25 +2,31 @@
   <div class="main">
     <div class="head">注册</div>
     <div class="input-value">
-      <input type="text" placeholder="请输入用户名" v-model="userName">
+      <el-input type="text" placeholder="请输入用户名" v-model="userName"></el-input>
     </div>
     <div class="input-value">
-      <input type="text" placeholder="名字" v-model="name">
+      <el-input type="password" placeholder="请输入密码" v-model="pwd"></el-input>
     </div>
     <div class="input-value">
-      <input type="password" placeholder="请输入密码" v-model="pwd">
+      <el-input type="password" placeholder="请确认密码" v-model="repeatPwd"></el-input>
     </div>
     <div class="input-value">
-      <input type="password" placeholder="请确认密码" v-model="repeatPwd">
+      <el-input type="text" placeholder="名字" v-model="name"></el-input>
     </div>
     <div class="input-value">
-      <input type="text" placeholder="地址" v-model="address">
+      <el-input type="number" placeholder="身份证号码" v-model="idCard"></el-input>
     </div>
     <div class="input-value">
-      <input type="number" placeholder="年龄" v-model="age">
+      <el-input type="number" placeholder="年龄" v-model="age"></el-input>
     </div>
     <div class="input-value">
-      <input type="email" placeholder="邮箱" v-model="email">
+      <el-input type="email" placeholder="email" v-model="email"></el-input>
+    </div>
+    <div class="input-value">
+      <el-input type="text" placeholder="地址" v-model="address"></el-input>
+    </div>
+    <div class="input-value">
+      <el-input type="number" placeholder="手机号码" v-model="phoneNum"></el-input>
     </div>
 
     <div class="footer">
@@ -34,18 +40,21 @@
 </template>
 
 <script>
-  import {sportMethod,dataMethod} from "../../../service/index"
+  import {sportMethod, dataMethod} from "../../../service/index"
+
   export default {
     name: "register",
     data() {
       return {
-        pwd:123456,
-        userName:"yang",
-        name:"杨景博",
-        repeatPwd:123456,
-        address:"河北",
-        age:"24",
-        email:"517725252@qq.com"
+        userName: "yang",
+        pwd: 123456,
+        repeatPwd: 123456,
+        name: "杨",
+        address: "河北",
+        email: "517725252@qq.com",
+        age: 15,
+        idCard: 130152133644452369,
+        phoneNum: 12366324568,
       }
     },
     created() {
@@ -56,28 +65,33 @@
     },
     computed: {},
     methods: {
-      register(){
-        const {pwd,userName,repeatPwd,name}=this;
-        if(!pwd||!userName||!repeatPwd||!name){
+      register() {
+        const {pwd, userName, repeatPwd, name,address,email,age,idCard,phoneNum} = this;
+        if (!pwd || !userName || !repeatPwd || !name) {
           alert("数据不可为空");
           return false
         }
-        if(pwd!=repeatPwd){
+        if (pwd != repeatPwd) {
           this.$message.error("密码不一致")
         }
-        const data={
+        const data = {
           userName,
           pwd,
-          name
+          name,
+          address,
+          email,
+          age,
+          idCard,
+          phoneNum,
         };
         sportMethod.register(data)
-          .then(res=>{
+          .then(res => {
             this.$message({
-              message:res.message,
-              type:"success"
+              message: res.message,
+              type: "success"
             })
           })
-          .catch(res=>{
+          .catch(res => {
             this.$message.error(res)
           })
       }

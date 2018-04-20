@@ -18,7 +18,7 @@
 </template>
 
 <script>
-  import {requestMethod, dataMethod} from "../../service/index"
+  import {requestMethod, dataMethod} from "../../../service/index"
 
   export default {
     name: "login",
@@ -67,5 +67,5 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import "./login.styl";
+  @import "login.styl";
 </style>

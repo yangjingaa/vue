@@ -39,3 +39,34 @@ export const register = (data) => {
       }
     )
 };
+
+/**
+ * 获得健身器材列表
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const  getEquipment=(data={})=>{
+  const url="/sport/getEquipment"+urlSplice(data);
+  return Axios.get(url)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 添加设备信息
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const  addEquipment=(data={})=>{
+  const url="/sport/addEquipment";
+  console.log(url);
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};

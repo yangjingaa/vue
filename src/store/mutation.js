@@ -13,6 +13,16 @@ const mutation={
   [type.set_teacher_info](state,teacherObject){
     state.teacherInfo=teacherObject;
   },
+  [type.set_user_info](state,userInfo){
+    if(userInfo&& typeof userInfo === "object"){
+      state.userInfo=userInfo;
+    }else {
+      for (let key in userInfo){
+
+        state.userInfo[key]=userInfo[key]
+      }
+    }
+  },
 };
 
 export default mutation

@@ -61,7 +61,7 @@
 </template>
 
 <script>
-  import {requestMethod} from "../../service/index"
+  import {requestMethod} from "../../../service/index"
   import {mapState, mapMutations,mapActions} from 'vuex'
 
   export default {
@@ -139,5 +139,5 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import "./course.styl"
+  @import "course.styl"
 </style>

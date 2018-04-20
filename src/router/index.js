@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-const Login = () => import("components/login/index");
-const Home = () => import("components/home/index");
-const Teachers = () => import("components/teacher/teacher");
-const Course = () => import("components/course/course");
-const Register = () => import("components/register/index");
-const Personal = () => import("components/personal/index");
-const ApplicationTeacher=()=>import("components/applicationTeacher/applicationTeacher");
-const TeacherInfo=()=>import("components/teacherInfo/teacherInfo");
-const UserList=()=>import("components/userList/userList");
+const Login = () => import("components/teachers/login/index");
+const Home = () => import("components/teachers/home/index");
+const Teachers = () => import("components/teachers/teacher/teacher");
+const Course = () => import("components/teachers/course/course");
+const Register = () => import("components/teachers/register/index");
+const Personal = () => import("components/teachers/personal/index");
+const ApplicationTeacher=()=>import("components/teachers/applicationTeacher/applicationTeacher");
+const TeacherInfo=()=>import("components/teachers/teacherInfo/teacherInfo");
+const UserList=()=>import("components/teachers/userList/userList");
 
 Vue.use(Router);
 

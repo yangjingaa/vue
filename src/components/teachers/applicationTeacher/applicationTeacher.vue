@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import {requestMethod} from "../../service/index"
+  import {requestMethod} from "../../../service/index"
     export default {
         name: "application-teacher",
         data() {
@@ -72,5 +72,5 @@
 </script>
 
 <style lang="stylus" scoped>
-@import "./applicationTeacher.styl"
+@import "applicationTeacher.styl"
 </style>
