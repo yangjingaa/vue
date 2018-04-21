@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App'
-// import router from './router/index'
-import router from './router/sportIndex'
+import teacherRouter from './router/index'
+import sportRouter from './router/sportIndex'
 import store from '@/store/index'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -18,6 +18,8 @@ Object.keys(Filters).forEach((key)=>{
 
 /* eslint-disable no-new */
 
+const router=teacherRouter;//外教项目
+// const router=sportRouter;//健身房项目
 
 new Vue({
   el: '#app',
