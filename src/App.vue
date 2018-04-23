@@ -16,6 +16,7 @@ export default {
   height: 100%;
   background: url("./bg.png");
   background-size: auto 100%;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 </style>

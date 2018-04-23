@@ -63,7 +63,49 @@ export const  getEquipment=(data={})=>{
 
 export const  addEquipment=(data={})=>{
   const url="/sport/addEquipment";
-  console.log(url);
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+/**
+ * 编辑设备信息
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const editEquipment=(data={})=>{
+  const url="/sport/editEquipment";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 删除设备
+ * @param data —id
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const deleteEquipment=(data)=>{
+  const url="/sport/deleteEquipment";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 预约课程
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const addReverse=(data)=>{
+  const url="/sport/addReverse";
   return Axios.post(url,data)
     .then(res => {
         return resultCheck(res)

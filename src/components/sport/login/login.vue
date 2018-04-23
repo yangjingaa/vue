@@ -2,10 +2,10 @@
   <div class="main">
     <div class="head">登录</div>
     <div class="input-value">
-      <input type="text" placeholder="请输入用户名" v-model="userName">
+      <el-input type="text" placeholder="请输入用户名" v-model="userName" />
     </div>
     <div class="input-value">
-      <input type="password" placeholder="请输入密码" v-model="pwd">
+      <el-input type="password" placeholder="请输入密码" v-model="pwd" />
     </div>
     <div class="footer">
       <el-button type="primary" @click="homeLogin" style="width :100%">登录</el-button>

@@ -18,8 +18,8 @@ Object.keys(Filters).forEach((key)=>{
 
 /* eslint-disable no-new */
 
-const router=teacherRouter;//外教项目
-// const router=sportRouter;//健身房项目
+// const router=teacherRouter;//外教项目
+const router=sportRouter;//健身房项目
 
 new Vue({
   el: '#app',

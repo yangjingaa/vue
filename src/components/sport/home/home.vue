@@ -4,7 +4,7 @@
       <!--<img src="./123.jpg" alt="">-->
       <div class="ulList">
         <ul class="list">
-          <router-link :to="{name:'elements'}" tag="li">器材{{userInfo}}</router-link>
+          <router-link :to="{name:'elements'}" tag="li">器材</router-link>
           <!--<router-link :to="{name:'course'}" tag="li">课程列表</router-link>-->
           <!--&lt;!&ndash;<router-link :to="{name:''}" tag="li">工资单</router-link>&ndash;&gt;-->
           <!--&lt;!&ndash;<router-link :to="{name:''}" tag="li">评价列表</router-link>&ndash;&gt;-->
@@ -68,4 +68,7 @@
 
 <style lang="stylus" scoped>
   @import "./home.styl"
+  .contentBox
+    padding 32px
+    min-height 566px
 </style>

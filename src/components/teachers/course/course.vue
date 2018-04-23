@@ -121,6 +121,7 @@
       },
       //跳转到老师信息页面
       JumpPersonalInfo(teacher) {
+        console.log(teacher);
         this.set_teacher_info(teacher);
         this.timeChange();
         const teacherId=teacher._id;

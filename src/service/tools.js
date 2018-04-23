@@ -52,6 +52,23 @@ export const urlSplice = (url) => {
     return str;
   }
 };
+/**
+ * 获取拼接的字符串
+ * @param date
+ * @returns {string}
+ */
+
+export const getNowDate = (date) => {
+  if (date) {
+    const newDate = new Date();
+    const dateTop = newDate.toLocaleDateString();
+    const dateArr =" "+ date + ":00";
+    const newDateString = dateTop + dateArr;
+    const timeStamp=new Date(newDateString).getTime();
+    return timeStamp
+  }
+  return ""
+};
 
 
 

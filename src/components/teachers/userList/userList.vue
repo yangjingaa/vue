@@ -11,7 +11,7 @@
         </el-table-column>
         <el-table-column label="用户名" prop="userName" width="180">
         </el-table-column>
-        <el-table-column label="密码" prop="pwd">
+        <el-table-column label="名字" prop="name">
         </el-table-column>
         <el-table-column label="角色" width="180">
           <template slot-scope="scope">
@@ -50,6 +50,7 @@
       getUserList() {
         requestMethod.getUserList()
           .then(res => {
+            console.log(res.data);
             this.userList = res.data;
           })
           .catch(res => {

@@ -9,3 +9,5 @@ export const ELE_TYPE= [
     {id:"freePower",name:"自由力量"},
     {id:"weightPower",name:"配重部分"},
   ];
+
+
