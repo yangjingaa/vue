@@ -1,5 +1,5 @@
 <template>
-    <div class="model">我是model页面
+    <div class="model">
       <div class="model-box">
         <div class="head">
           <slot name="head">

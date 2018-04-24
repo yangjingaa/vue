@@ -89,7 +89,7 @@
       },
 
       showModel(key, value,resDate) {
-        this.$emit("showModel", key, value,resDate)
+        this.$emit("showModel", key, value,resDate);
       },
       image(value) {
         return `static/image/ele-image/${value}.jpg`

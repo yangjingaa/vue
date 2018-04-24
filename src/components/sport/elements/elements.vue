@@ -10,8 +10,8 @@
       <div class="list">
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="有氧训练" name="hasOxygen">
-            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='hasOxygen'">
-              <div class="ele-child">
+            <div class="ele-box"  v-if="activeName==='hasOxygen'">
+              <div class="ele-child" v-for=" item in equipment">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
               </div>
             </div>
@@ -81,7 +81,7 @@
           </div>
           <div class="addInput">
             <span>类型：</span>
-            <el-select v-model="editEquInfo.type" placeholder="类型">
+            <el-select v-model="equInfo.type" placeholder="类型">
               <el-option
                 v-for="item in eleType"
                 :key="item.id"
@@ -276,6 +276,7 @@
           message: equInfo.message,
           iName: equInfo.iName,
         };
+        console.log(data)
         sportMethod.addEquipment(data)
           .then(res => {
             this.$message({
@@ -391,7 +392,7 @@
                 type:"success"
               });
               this.hided();
-              this.getEquipment()
+              this.getEquipment();
             })
             .catch(err=>{
               this.$message.error(err)
