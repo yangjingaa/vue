@@ -2,17 +2,17 @@
   <div class="main">
     <div class="head">注册</div>
     <div class="input-value">
-      <input type="text" placeholder="请输入用户名" v-model="userName">
+      <el-input type="text" placeholder="请输入用户名" v-model="userName" />
     </div>
     <div class="input-value">
-      <input type="text" placeholder="名字" v-model="name">
+      <el-input type="text" placeholder="名字" v-model="name" />
     </div>
 
     <div class="input-value">
-      <input type="password" placeholder="请输入密码" v-model="pwd">
+      <el-input type="password" placeholder="请输入密码" v-model="pwd" />
     </div>
     <div class="input-value">
-      <input type="password" placeholder="请确认密码" v-model="repeatPwd">
+      <el-input type="password" placeholder="请确认密码" v-model="repeatPwd" />
     </div>
 
 

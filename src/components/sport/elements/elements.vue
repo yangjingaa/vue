@@ -1,8 +1,7 @@
 <template>
   <div class="ele">
-    <p>器材展示：名字，图片，适合人群， 使用人数，</p>
-    <div class="ele-top">
-      <span class="func-button"><el-button @click="showModel('add')">添加</el-button></span>
+    <div class="ele-top" v-if="user.isAdmin===1">
+      <span class="func-button"><el-button  @click="showModel('add')">添加</el-button></span>
     </div>
     <!--content-->
 
@@ -13,55 +12,14 @@
           <el-tab-pane label="有氧训练" name="hasOxygen">
             <div class="ele-box" v-for=" item in equipment" v-if="item.type==='hasOxygen'">
               <div class="ele-child">
-                <div class="box">
-                  <div class="ele-img">
-                    <img :src='image(item.iName)' alt="">
-                  </div>
-                  <div class="content">
-                    <p>{{item.name}}</p>
-                    <div class="message">
-                      {{item.message}}
-                    </div>
-                  </div>
-                  <div class="button">
-                    <el-button type="primary" circle @click="showModel('reservation',item)">预约</el-button>
-                    <el-button v-if="user.isAdmin===1" type="danger" icon="el-icon-delete" circle
-                               @click="deleteEle(item)"/>
-                    <span class="func-button">
-                    <el-button v-if="user.isAdmin===1" type="primary" icon="el-icon-edit" circle
-                               @click="showModel('edit',item)"/>
-                  </span>
-                    <span class="reservation">已预约：<span class="peo">20</span>人</span>
-                  </div>
-                </div>
+                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="组合力量" name="mobPower">
             <div class="ele-box" v-for=" item in equipment" v-if="item.type==='mobPower'">
               <div class="ele-child">
-                <div class="box">
-                  <div class="ele-img">
-                    <img :src='image(item.iName)' alt="">
-                  </div>
-                  <div class="content">
-                    <p>{{item.name}}</p>
-                    <div class="message">
-                      {{item.message}}
-                    </div>
-                  </div>
-                  <div class="button">
-                    <el-button type="primary" circle @click="showModel('reservation',item._id)">预约</el-button>
-                    <el-button v-if="user.isAdmin===1" type="danger" icon="el-icon-delete" circle
-                               @click="deleteEle(item)"/>
-                    <span class="func-button">
-                    <el-button v-if="user.isAdmin===1" type="primary" icon="el-icon-edit" circle
-                               @click="showModel('edit',null,item)"/>
-                  </span>
-                    <span class="reservation">已预约：<span class="peo">20</span>人</span>
-                  </div>
-                </div>
-
+                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
               </div>
 
 
@@ -70,32 +28,8 @@
           <el-tab-pane label="自由力量" name="freePower">
             <div class="ele-box" v-for=" item in equipment" v-if="item.type==='freePower'">
               <div class="ele-child">
-                <div class="box">
-                  <div class="ele-img">
-                    <img :src='image(item.iName)' alt="">
-                  </div>
-                  <div class="content">
-                    <p>{{item.name}}</p>
-                    <div class="message">
-                      {{item.message}}
-                    </div>
-                  </div>
-                  <div class="button">
-                    <el-button type="primary" circle @click="showModel('reservation',item._id)">预约</el-button>
-                    <el-button v-if="user.isAdmin===1" type="danger" icon="el-icon-delete" circle
-                               @click="deleteEle(item)"/>
-                    <span class="func-button">
-                    <el-button v-if="user.isAdmin===1" type="primary" icon="el-icon-edit" circle
-                               @click="showModel('edit',null,item)"/>
-                  </span>
-                    <span class="reservation">已预约：<span class="peo">20</span>人</span>
-                  </div>
-
-                </div>
-
+                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
               </div>
-
-
             </div>
           </el-tab-pane>
           <el-tab-pane label="配重部分" name="weightPower">
@@ -122,7 +56,7 @@
                     <span class="reservation">已预约：<span class="peo">20</span>人</span>
                   </div>
                 </div>
-
+                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
               </div>
 
 
@@ -172,9 +106,15 @@
         <span slot="head">{{reservationInfo.name}}预约</span>
         <div slot="content" class="addContent">
           <p style="color:red">注意事项：没人每天每个设备，只能预约一次</p>
+          <div class="res-time"  v-if="resDate.length>0">
+            <span class="spanss">已预约时间:</span>
+            <span v-for=" item in resDate">
+              {{item.startTime|dateFilter(true)}} - {{item.endTime|dateFilter(true)}}
+            </span>
+          </div>
           <div class="addInput">
             <span>名字：</span>
-            <el-input v-model="reservationInfo.name" placeholder="设备名字："/>
+            <el-input disabled v-model="reservationInfo.name" placeholder="设备名字："/>
           </div>
 
           <div class="addInput">
@@ -246,6 +186,8 @@
   import {sportMethod, dataMethod} from "../../../service/index"
   import {StatusCode} from "../../../public/message/index"
   import Model from "../../../common/model/model"
+  import equBox from "../../../common/equBox/equBox"
+
 
   export default {
     name: "elements",
@@ -272,7 +214,8 @@
           _id:""
         },//预约信息
         startTime:"",
-        endTime:""
+        endTime:"",
+        resDate:[],
       }
     },
     created() {
@@ -293,15 +236,16 @@
       handleClick(tab) {
         const {name} = tab;
         this.activeName = name;
-        this.getEquipment(name);
+        this.getEquipment();
       },
 
       image(value) {
         return `../../../../static/ele-image/${value}.jpg`
       },
 
+
       //展示Model
-      showModel(key, equInfo) {
+      showModel(key, equInfo,resDate) {
         this.modelState = key;
         if (equInfo && key === "edit") {
           this.editEquInfo = {...equInfo};
@@ -311,7 +255,8 @@
           this.reservationInfo={
             name:equInfo.name,
             equId:equInfo._id
-          }
+          };
+          this.resDate=resDate
         }
       },
 
@@ -388,10 +333,11 @@
       },
 
       //获取设备列表
-      getEquipment(name) {
+      getEquipment() {
         const data = {
-          type: name,
+          type: this.activeName,
         };
+        console.log(data)
         sportMethod.getEquipment(data)
           .then(res => {
             this.equipment = res.data;
@@ -427,7 +373,7 @@
       //预约设备
 
       reservationEqu() {
-        const {reservationInfo,startTime,endTime,user} = this;
+        const {reservationInfo,startTime,endTime,user,resDate} = this;
         const {equId,name}=reservationInfo;
         const data={
           userId:user._id,
@@ -436,17 +382,38 @@
           startTime:dataMethod.getNowDate(startTime),
           endTime:dataMethod.getNowDate(endTime),
         };
-        sportMethod.addReverse(data)
-          .then(res=>{
-            console.log(res)
-          })
-          .catch(err=>{
-            this.$message.error(err)
-          })
-      }
+        const resultTime=this.judgeTime(resDate,data.startTime,data.endTime);
+        if(resultTime){
+          sportMethod.addReverse(data)
+            .then(res=>{
+              this.$message({
+                message:res.message,
+                type:"success"
+              });
+              this.hided();
+              this.getEquipment()
+            })
+            .catch(err=>{
+              this.$message.error(err)
+            })
+        }else {
+          this.$message.error("请选择正确预约时间")
+        }
+
+      },
+      judgeTime(resDate,start,end){
+        return resDate.every(value=>{
+          let res=false;
+          if(start>=value.endTime||end<=value.startTime){
+            res=true
+          }
+          return res;
+        })
+      },
     },
     components: {
       Model: Model,
+      equBox:equBox
     },
     watch: {}
   }

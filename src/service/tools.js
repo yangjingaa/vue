@@ -71,5 +71,11 @@ export const getNowDate = (date) => {
 };
 
 
+// export const getUser=()=> {
+//   const user = dataMethod.getLocalData("user")[0];
+//   this.user = user;
+// },
+
+
 
 

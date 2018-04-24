@@ -39,6 +39,18 @@ export const register = (data) => {
       }
     )
 };
+/**
+ * 获得用户信息
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getUserInfo=(data)=>{
+  return Axios.post("/sport/getUserInfo", data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
 
 /**
  * 获得健身器材列表
@@ -106,6 +118,105 @@ export const deleteEquipment=(data)=>{
  */
 export const addReverse=(data)=>{
   const url="/sport/addReverse";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 獲得用戶 預約課程
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const getReservationEquipment=(data)=>{
+  const url="/sport/reservationEquipment"+urlSplice(data);
+  return Axios.get(url)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 取消預約
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const cancelRes=(data)=>{
+  const url="/sport/cancelRes";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 获得设备预约时间
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getResTime=(data)=>{
+  const url="/sport/getResTime"+urlSplice(data);
+  return Axios.get(url)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+/**
+ * 获取会员卡
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const getCard=(data={})=>{
+  const url="/sport/getCard";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * t添加会员卡
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const addVipCard=(data)=>{
+  const url="/sport/addVipCard";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 编辑会员卡
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const updateCard=(data)=>{
+  const url="/sport/updateCard";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 购买会员卡
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const buyCards=(data)=>{
+  const url="/sport/buyCards";
   return Axios.post(url,data)
     .then(res => {
         return resultCheck(res)

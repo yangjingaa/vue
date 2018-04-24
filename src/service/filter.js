@@ -4,14 +4,20 @@
  * @returns {string}
  */
 
-export const dateFilter=(time)=>{
-  const date=new Date(time);
+export const dateFilter=(time,value)=>{
+  const date=new Date(parseInt(time));
   const year=date.getFullYear();
+
   const month=date.getMonth()+1;
   const day=date.getDate();
   const hours=date.getHours();
   const minute=date.getMinutes();
-  let str=`${year}-${month}-${day} ${hours}:${minute}`;
+  let str="";
+  if(value){
+    str=`${hours}:${minute}`
+  }else {
+    str=`${year}-${month}-${day} ${hours}:${minute}`;
+  }
   return str
 };
 

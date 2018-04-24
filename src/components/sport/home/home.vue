@@ -5,8 +5,8 @@
       <div class="ulList">
         <ul class="list">
           <router-link :to="{name:'elements'}" tag="li">器材</router-link>
-          <!--<router-link :to="{name:'course'}" tag="li">课程列表</router-link>-->
-          <!--&lt;!&ndash;<router-link :to="{name:''}" tag="li">工资单</router-link>&ndash;&gt;-->
+          <router-link :to="{name:'reservation'}" tag="li">我的预约</router-link>
+          <router-link :to="{name:'vipCard'}" tag="li">会员卡</router-link>
           <!--&lt;!&ndash;<router-link :to="{name:''}" tag="li">评价列表</router-link>&ndash;&gt;-->
           <!--<router-link :to="{name:'teacher'}" tag="li">老师管理</router-link>-->
           <!--<router-link :to="{name:'personal'}" tag="li">个人信息</router-link>-->
