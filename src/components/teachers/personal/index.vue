@@ -6,24 +6,31 @@
     <div class="writeInfo">
         <span class="input">
           <div class="font">名字：</div>
-          <input disabled v-model="name" placeholder="名字">
+          <el-input disabled v-model="name" placeholder="名字"/>
         </span>
+        <span class="input">
+        <div class="font" style="color:red">身份：</div>
+        <el-input type="text" disabled v-model="identity" placeholder="毕业院校"/>
+      </span>
       <span class="input">
         <div class="font">年龄：</div>
-        <input v-model="age" placeholder="">
+        <el-input v-model="age" placeholder=""/>
       </span>
       <span class="input">
         <div class="font">email：</div>
-          <input type="text" v-model="email" placeholder="年龄">
+          <el-input type="text" v-model="email" placeholder="年龄"/>
       </span>
       <span class="input">
-        <div class="font">地址：</div><input type="text" v-model="address" placeholder="地址">
+        <div class="font">地址：</div><el-input type="text" v-model="address" placeholder="地址"/>
       </span>
       <span class="input">
         <div class="font">毕业院校：</div>
-        <input type="text" v-model="graduateSchool" placeholder="毕业院校">
+        <el-input type="text" v-model="graduateSchool" placeholder="毕业院校"/>
       </span>
-      <el-button type="primary" @click="addList">确定</el-button>
+      
+      <div v-if="teacher">
+        <el-button type="primary" @click="addList">确定</el-button>
+      </div>
     </div>
   </div>
 </template>
@@ -32,7 +39,6 @@
   import {requestMethod, dataMethod} from "../../../service/index"
 
   export default {
-    name: "index",
     data() {
       return {
         name: "杨景博",
@@ -48,7 +54,18 @@
     mounted() {
       this.getUserName();
     },
-    computed: {},
+    computed: {
+      teacher(){
+        return  !this.userIsTeacher()
+      },
+      identity(){
+        if(!this.userIsTeacher()){
+          return "游客"
+        }else {
+          return "教师"
+        }
+      }
+    },
     methods: {
       //添加老师信息
       addList() {
@@ -72,8 +89,7 @@
         const user=dataMethod.getLocalData("user")[0];
         this.name=user.name;
         this._id=user._id;
-
-      }
+      },
     },
     components: {},
     watch: {}

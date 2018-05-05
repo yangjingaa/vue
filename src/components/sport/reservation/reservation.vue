@@ -2,7 +2,7 @@
   <div class="res-box">
     <div class="res-content" >
       <div v-if="equipment.length>0">
-        <el-card shadow="hover" class="res-card" v-for="item in equipment">
+        <el-card shadow="hover" class="res-card" v-for="(item, index) in equipment" :key="index">
           <div class="res-list">
             <img :src="image(item.equId.iName)" alt="">
           </div>

@@ -6,12 +6,24 @@
 
 export const dateFilter=(time,value)=>{
   const date=new Date(parseInt(time));
-  const year=date.getFullYear();
+  let year=date.getFullYear();
 
-  const month=date.getMonth()+1;
-  const day=date.getDate();
-  const hours=date.getHours();
-  const minute=date.getMinutes();
+  let month=date.getMonth()+1;
+  let day=date.getDate();
+  let hours=date.getHours();
+  let minute=date.getMinutes();
+  if(month<10){
+    month="0"+month
+  }
+  if(day<10){
+    day="0"+day
+  }
+  if(hours<10){
+    hours="0"+hours
+  }
+  if(minute<10){
+    minute="0"+minute
+  }
   let str="";
   if(value){
     str=`${hours}:${minute}`
@@ -23,9 +35,9 @@ export const dateFilter=(time,value)=>{
 
 export const scoreStatus=(score)=>{
   const num=Number(score);
-  if(num>=0&&num<5){
+  if(num>=0&&num<=5){
     return "差"
-  }else if(num<10){
+  }else if(num<=10){
     return "良好"
   }else {
     return "好"
@@ -48,3 +60,19 @@ export const roleName = (num) => {
     return "被辞退"
   }
 };
+/**
+ * 等级筛选
+ * @param {} num 
+ */
+export const grade=(num)=>{
+  num=Number(num);
+  if (num === 0) {
+    return "初级"
+  } else if (num === 1) {
+    return "中级"
+  }else if (num === 2) {
+    return "高级"
+  } else if (num === 3) {
+    return "顶级"
+  }
+}

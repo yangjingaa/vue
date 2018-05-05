@@ -5,13 +5,12 @@ import {urlSplice} from "./tools"
 //处理数据
 const resultCheck = (res) => {
   return new Promise((resolve, reject) => {
-    if (res.data.status == 0) {
+    if (res.data.status === 0) {
       resolve(res.data)
     }
-    if (res.data.status == 1) {
+    if (res.data.status === 1) {
       reject(res.data.message);
     }
-
   })
 };
 
@@ -73,7 +72,7 @@ export const  getEquipment=(data={})=>{
  * @returns {Promise<AxiosResponse<any>>}
  */
 
-export const  addEquipment=(data={})=>{
+export const  addEquipment=(data)=>{
   const url="/sport/addEquipment";
   return Axios.post(url,data)
     .then(res => {

@@ -32,15 +32,15 @@
         name: "register",
         data() {
             return {
-              pwd:123456,
-              userName:"yang",
-              repeatPwd:123456,
+              pwd:null,
+              userName:null,
+              repeatPwd:null,
               name:null,
-              address:"河北",
-              email:"517725252@qq.com",
-              age:15,
-              idCard:130152133644452369,
-              phoneNum:12366324568,
+              address:null,
+              email:null,
+              age:null,
+              idCard:null,
+              phoneNum:null,
             }
         },
         created() {
@@ -54,7 +54,7 @@
           register(){
             const {pwd,userName,repeatPwd,name,address,email,age,idCard,phoneNum}=this;
             if(!pwd||!userName||!repeatPwd||!name){
-              alert("数据不可为空");
+              his.$message.warning("数据不可为空");
               return false
             }
             if(pwd!=repeatPwd){

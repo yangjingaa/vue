@@ -33,6 +33,8 @@ export const getTeacherList = () => {
     })
 };
 
+
+
 //获取申请老师列表
 
 export const getAppTeacherList = () => {
@@ -80,6 +82,12 @@ export const addCourse = (data) => {
       return resultCheck(res)
     })
 };
+
+/**
+ * 添加老师
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
 
 export const addTeacher = (data) => {
   return Axios.post("/addTeacher", data)
@@ -165,3 +173,38 @@ export const deleteUser=(data)=>{
       return resultCheck(res)
     })
 };
+
+/**
+ * 获得老师信息
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const  getTeacherInfo=(data)=>{
+  const  url="/getTeacherInfo"+urlSplice(data);
+  return Axios.get(url)
+    .then(res=>{
+      return resultCheck(res)
+    })
+};
+/**
+ * 恢复老师授权
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+
+export const recoveryteUser=(data)=>{
+  return Axios.post("/recoveryteUser",data)
+    .then(res=>{
+      return resultCheck(res)
+    })
+};
+/**
+ * 筛选课程
+ * @param  data 
+ */
+export const screenTable=(data)=>{
+  return Axios.post("/screenTable",data)
+  .then(res=>{
+    return resultCheck(res)
+  })
+}

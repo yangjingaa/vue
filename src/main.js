@@ -7,8 +7,11 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import "../static/main.css"
 import * as Filters from "./service/filter"
+import {miXin} from "./service/index"
 
 Vue.use(ElementUI);
+
+Vue.mixin(miXin.powerMiXin);
 
 Vue.config.productionTip = false;
 
@@ -18,8 +21,8 @@ Object.keys(Filters).forEach((key)=>{
 
 /* eslint-disable no-new */
 
-// const router=teacherRouter;//外教项目
-const router=sportRouter;//健身房项目
+const router=teacherRouter;//外教项目
+// const router=sportRouter;//健身房项目
 
 new Vue({
   el: '#app',

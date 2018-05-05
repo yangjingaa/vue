@@ -12,54 +12,29 @@
           <el-tab-pane label="有氧训练" name="hasOxygen">
             <div class="ele-box"  v-if="activeName==='hasOxygen'">
               <div class="ele-child" v-for=" item in equipment">
-                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
+                <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="组合力量" name="mobPower">
             <div class="ele-box" v-for=" item in equipment" v-if="item.type==='mobPower'">
               <div class="ele-child">
-                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
+                <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
-
-
             </div>
           </el-tab-pane>
           <el-tab-pane label="自由力量" name="freePower">
             <div class="ele-box" v-for=" item in equipment" v-if="item.type==='freePower'">
               <div class="ele-child">
-                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
+                <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="配重部分" name="weightPower">
-            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='freePower'">
+            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='weightPower'">
               <div class="ele-child">
-                <div class="box">
-                  <div class="ele-img">
-                    <img :src='image(item.iName)' alt="">
-                  </div>
-                  <div class="content">
-                    <p>{{item.name}}</p>
-                    <div class="message">
-                      {{item.message}}
-                    </div>
-                  </div>
-                  <div class="button">
-                    <el-button type="primary" circle @click="showModel('reservation',item._id)">预约</el-button>
-                    <el-button v-if="user.isAdmin===1" type="danger" icon="el-icon-delete" circle
-                               @click="deleteEle(item)"/>
-                    <span class="func-button">
-                    <el-button v-if="user.isAdmin===1" type="primary" icon="el-icon-edit" circle
-                               @click="showModel('edit',null,item)"/>
-                  </span>
-                    <span class="reservation">已预约：<span class="peo">20</span>人</span>
-                  </div>
-                </div>
-                <equBox :equipment-item="item" :user="user" @showModel="showModel"/>
+                <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
-
-
             </div>
           </el-tab-pane>
         </el-tabs>
@@ -200,7 +175,7 @@
         // 添加设备信息对象
         equInfo: {
           name: "",
-          iName: "",
+          iName: "treadmill",
           calories: "",
           type: "",
           message: "",
@@ -276,7 +251,6 @@
           message: equInfo.message,
           iName: equInfo.iName,
         };
-        console.log(data)
         sportMethod.addEquipment(data)
           .then(res => {
             this.$message({
@@ -284,7 +258,7 @@
               type: "success",
             }),
               this.getEquipment();
-            this.hided();
+              this.hided();
           })
           .catch(error => {
             this.$message.error(error)
@@ -315,18 +289,16 @@
 
       //删除设备
       deleteEquipment(value) {
+        console.log("删除");
         const {_id} = value;
         const data = {
           _id,
         };
+        console.log(data);
         sportMethod.deleteEquipment(data)
           .then(res => {
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
+            this.$message.success(res.message);
             this.getEquipment();
-
           })
           .catch(error => {
             this.$message.error(error)
@@ -338,7 +310,7 @@
         const data = {
           type: this.activeName,
         };
-        console.log(data)
+        console.log(data);
         sportMethod.getEquipment(data)
           .then(res => {
             this.equipment = res.data;
@@ -362,7 +334,8 @@
           type: 'warning'
         })
           .then(() => {
-            this.deleteEquipment(value)
+            console.log(123456)
+            // this.deleteEquipment(value)
           }).catch(() => {
           this.$message({
             type: 'info',

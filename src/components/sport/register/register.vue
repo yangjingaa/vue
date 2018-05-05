@@ -2,16 +2,16 @@
   <div class="main">
     <div class="head">注册</div>
     <div class="input-value">
-      <div class="name">用户名:</div><el-input type="text" placeholder="请输入用户名" v-model="userName"/>
+      <div class="name">*用户名:</div><el-input type="text" placeholder="请输入用户名" v-model="userName"/>
     </div>
     <div class="input-value">
-      <div class="name">请输入密码:</div><el-input type="password" placeholder="请输入密码" v-model="pwd"/>
+      <div class="name">*请输入密码:</div><el-input type="password" placeholder="请输入密码" v-model="pwd"/>
     </div>
     <div class="input-value">
-      <div class="name">请确认密码:</div><el-input type="password" placeholder="请确认密码" v-model="repeatPwd"/>
+      <div class="name">*请确认密码:</div><el-input type="password" placeholder="请确认密码" v-model="repeatPwd"/>
     </div>
     <div class="input-value">
-      <div class="name">名字:</div> <el-input type="text" placeholder="名字" v-model="name"/>
+      <div class="name">*名字:</div> <el-input type="text" placeholder="名字" v-model="name"/>
     </div>
     <div class="input-value">
       <div class="name">身份证号码:</div><el-input type="number" placeholder="身份证号码" v-model="idCard"/>
@@ -68,7 +68,7 @@
       register() {
         const {pwd, userName, repeatPwd, name,address,email,age,idCard,phoneNum} = this;
         if (!pwd || !userName || !repeatPwd || !name) {
-          alert("数据不可为空");
+          this.$message.warning("数据不可为空");
           return false
         }
         if (pwd != repeatPwd) {
@@ -92,8 +92,8 @@
               type: "success"
             })
           })
-          .catch(res => {
-            this.$message.error(res)
+          .catch(mess => {
+            this.$message.error(mess)
           })
       }
     },

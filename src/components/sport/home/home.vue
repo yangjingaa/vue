@@ -48,7 +48,7 @@
     },
     methods: {
       signOut(){
-        dataMethod.removeLocalData("user");
+        dataMethod.clearLocalData("user");
         this.$router.push("/login")
       },
       automaticLogon() {

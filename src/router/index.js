@@ -10,6 +10,7 @@ const Personal = () => import("components/teachers/personal/index");
 const ApplicationTeacher=()=>import("components/teachers/applicationTeacher/applicationTeacher");
 const TeacherInfo=()=>import("components/teachers/teacherInfo/teacherInfo");
 const UserList=()=>import("components/teachers/userList/userList");
+const openCourse=()=>import("components/teachers/openCourse/openCourse");
 
 Vue.use(Router);
 
@@ -62,6 +63,10 @@ export default new Router({
         path:"userList",
         name:"userList",
         component:UserList
+      },{
+        path:"openCourse",
+        name:"openCourse",
+        component:openCourse
       }]
     },
 

@@ -1,23 +1,5 @@
 <template>
   <div class="teacher-home">
-    <div class="top">
-        <span class="input">名字：
-          <input v-model="name" placeholder="">
-        </span>
-      <span class="input">年龄：
-        <input v-model="age"  placeholder="">
-      </span>
-      <span class="input">email：
-          <input type="text" v-model="email" placeholder="">
-      </span>
-      <span class="input">地址：
-          <input type="text" v-model="address" placeholder="">
-      </span>
-      <span class="input">毕业院校：
-          <input type="text" v-model="graduateSchool" placeholder="">
-      </span>
-      <el-button type="primary" @click="addList">添加</el-button>
-    </div>
     <div class="table">
       <el-table :data="teacherList" style="width: 100%" @row-click="tableSelectClick">
         <el-table-column prop="name" label="姓名" width="180"></el-table-column>

@@ -146,7 +146,6 @@
             _id:id,
           }
         }
-        console.log(data);
         sportMethod.getCard(data)
           .then(res => {
             this.cardInfo = res.data;

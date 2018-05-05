@@ -60,6 +60,7 @@
           type: 'warning'
         })
           .then(() => {
+            console.log(12346);
             this.deleteEquipment(value)
           }).catch(() => {
           this.$message({
@@ -76,12 +77,8 @@
         };
         sportMethod.deleteEquipment(data)
           .then(res => {
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.getEquipment();
-
+            this.$message.success(res.message);
+            this.$emit("getEquipment")
           })
           .catch(error => {
             this.$message.error(error)

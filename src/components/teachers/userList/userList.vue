@@ -20,7 +20,10 @@
         </el-table-column>
         <el-table-column label="操作" width="180">
           <template slot-scope="scope">
-            <el-button v-if="roleButton(scope.row.isAdmin)" @click="deleteUser(scope.row._id)">删除</el-button>
+            <span v-if="roleButton(scope.row.isAdmin)" style="display: flex;justify-content: space-around">
+              <el-button  @click="deleteUser(scope.row._id)">删除</el-button>
+              <el-button   @click="recoveryteUser(scope.row._id)">恢复授权</el-button>
+            </span>
           </template>
         </el-table-column>
       </el-table>
@@ -66,10 +69,22 @@
         const data = {_id};
         requestMethod.deleteUser(data)
           .then(res => {
+            this.$message.success(res.message);
             this.getUserList()
           })
           .catch(mess => {
             console.log(mess);
+          })
+      },
+      recoveryteUser(_id){
+        const data = {_id};
+        requestMethod.recoveryteUser(data)
+          .then(res=>{
+            this.$message.success(res.message)
+            this.getUserList()
+          })
+          .catch(err=>{
+            this.$message.error(err)
           })
       }
     },

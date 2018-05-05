@@ -1,6 +1,7 @@
 <template>
   <div class="main">
-    <div class="head">登录</div>
+    <div class="head">外教老师管理系统</div>
+    <!--<div class="head">登录</div>-->
     <div class="input-value">
       <el-input type="text" placeholder="请输入用户名" v-model="userName" />
     </div>
@@ -18,54 +19,73 @@
 </template>
 
 <script>
-  import {requestMethod, dataMethod} from "../../../service/index"
+import { requestMethod, dataMethod } from "../../../service/index";
 
-  export default {
+export default {
     name: "login",
     data() {
-      return {
-        userName: "admin",
-        pwd: 123456
-      }
+        return {
+            userName: "admin",
+            pwd: "123456"
+        };
     },
     created() {
-      this.automaticLogon();
+        this.automaticLogon();
     },
-    mounted() {
-
-    },
+    mounted() {},
     computed: {},
     methods: {
-      homeLogin() {
-        if (!this.userName || !this.pwd) {
-          alert("请检车输入");
-          return false
+        homeLogin() {
+            if (!this.userName || !this.pwd) {
+                this.$message.warning("请检查输入");
+                return false;
+            }
+            const data = {
+                userName: this.userName,
+                pwd: this.pwd
+            };
+            requestMethod
+                .login(data)
+                .then(res => {
+                    dataMethod.setLocalData("user", res.data);
+                    this.getTeacherInfo(res.data[0]._id);
+                })
+                .catch(error => {
+                    this.$message.error(error);
+                });
+        },
+        automaticLogon() {
+            let user = dataMethod.getLocalData("user");
+            if (user) {
+                this.$router.push("/home");
+            }
+        },
+        //获得老师信息
+        getTeacherInfo(id) {
+            const data = {
+                _id: id
+            };
+            requestMethod
+                .getTeacherInfo(data)
+                .then(res => {
+                    let teacher = [];
+                    if (res.data.length > 0) {
+                        const data = res.data;
+                        teacher = data[0];
+                    }
+                    dataMethod.setLocalData("teacher", teacher);
+                    this.$router.push("/home");
+                })
+                .catch(err => {
+                    this.$message.error(err);
+                });
         }
-        const data = {
-          userName: this.userName,
-          pwd: this.pwd
-        };
-        requestMethod.login(data)
-          .then((res) => {
-            dataMethod.setLocalData("user", res.data);
-            this.$router.push("/home")
-          })
-          .catch((error) => {
-            this.$message.error(error)
-          })
-      },
-      automaticLogon() {
-        let user = dataMethod.getLocalData("user");
-        if (user) {
-          this.$router.push("/home")
-        }
-      },
     },
     components: {},
     watch: {}
-  }
+};
 </script>
 
 <style lang="stylus" scoped>
-  @import "login.styl";
+@import 'login.styl';
 </style>
