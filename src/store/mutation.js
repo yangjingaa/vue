@@ -13,6 +13,10 @@ const mutation={
   [type.set_teacher_info](state,teacherObject){
     state.teacherInfo=teacherObject;
   },
+  [type.set_lange](state,value){
+    state.lange=value;
+  },
+
   [type.set_user_info](state,userInfo){
     if(userInfo&& typeof userInfo === "object"){
       state.userInfo=userInfo;

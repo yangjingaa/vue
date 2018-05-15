@@ -17,6 +17,13 @@ export const ELE_TYPE= [
     {id:3,name:"顶级"},
   ]
 
+  export const ENGLISH_GRADE=[
+    {id:0,name:"primary"},
+    {id:1,name:"middleLevel"},
+    {id:2,name:"advanced"},
+    {id:3,name:"topLevel"},
+  ]
+
   export const peopleNumeber=[
     {id:1,name:1},
     {id:2,name:2},

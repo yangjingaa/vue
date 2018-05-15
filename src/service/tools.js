@@ -1,3 +1,6 @@
+import {
+  StatusCode
+} from "../public/message/index"
 /**
  * 设置本地数据
  * @param key
@@ -62,20 +65,34 @@ export const getNowDate = (date) => {
   if (date) {
     const newDate = new Date();
     const dateTop = newDate.toLocaleDateString();
-    const dateArr =" "+ date + ":00";
+    const dateArr = " " + date + ":00";
     const newDateString = dateTop + dateArr;
-    const timeStamp=new Date(newDateString).getTime();
+    const timeStamp = new Date(newDateString).getTime();
     return timeStamp
   }
   return ""
 };
 
 
-// export const getUser=()=> {
-//   const user = dataMethod.getLocalData("user")[0];
-//   this.user = user;
-// },
+/**
+ * 开课等级限制
+ * 
+ * value 为TRUE 为英文
+ * @param {} gradeNum 
+ */
 
-
-
-
+export const gradeDisabled = (gradeNum, val) => {
+  let gradeCode = null;
+  if (val) {
+    gradeCode = StatusCode.ENGLISH_GRADE;
+  } else {
+    gradeCode = StatusCode.GRADE;
+  }
+  gradeCode.forEach(function (value) {
+    const num = value.id;
+    if (num > gradeNum) {
+      value.disabled = true;
+    }
+  })
+  return gradeCode;
+}

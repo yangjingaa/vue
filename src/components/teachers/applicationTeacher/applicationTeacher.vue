@@ -39,7 +39,6 @@
           getAppTeacherList(){
             requestMethod.getAppTeacherList()
               .then(res=>{
-                console.log(res.data);
                 this.tableData=res.data
               })
               .catch(res=>{

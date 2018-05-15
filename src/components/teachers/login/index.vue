@@ -1,21 +1,23 @@
 <template>
-  <div class="main">
-    <div class="head">外教老师管理系统</div>
-    <!--<div class="head">登录</div>-->
-    <div class="input-value">
-      <el-input type="text" placeholder="请输入用户名" v-model="userName" />
+    <div class="main">
+        <div class="head">{{$t("message.title")}}</div>
+        <!-- <div class="head">外教老师管理系统</div> -->
+        
+        <!--<div class="head">登录</div>-->
+        <div class="input-value">
+            <el-input type="text" placeholder="请输入用户名" v-model="userName" />
+        </div>
+        <div class="input-value">
+            <el-input type="password" placeholder="请输入密码" v-model="pwd" />
+        </div>
+        <div class="footer">
+            <el-button type="primary" @click="homeLogin" style="width :100%">{{$t("message.login")}}</el-button>
+
+        </div>
+        <div class="footer-span">
+            <router-link tag="span" to="/register" class="register">{{$t("message.register")}}</router-link>
+        </div>
     </div>
-    <div class="input-value">
-      <el-input type="password" placeholder="请输入密码" v-model="pwd" />
-    </div>
-    <div class="footer">
-      <el-button type="primary" @click="homeLogin" style="width :100%">登录</el-button>
-    </div>
-    <div class="footer-span">
-      <router-link tag="span" to="/register" class="register">注册</router-link>
-      <!--<span class="forget-pwd">忘记密码</span>-->
-    </div>
-  </div>
 </template>
 
 <script>
@@ -79,6 +81,10 @@ export default {
                 .catch(err => {
                     this.$message.error(err);
                 });
+        },
+        langeChange() {
+            this.$i18n.locale = "cn";
+            window.localStorage.setItem("language", "en");
         }
     },
     components: {},

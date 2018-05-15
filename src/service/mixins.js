@@ -4,7 +4,8 @@ import { requestMethod, dataMethod } from "./index";
 export const powerMiXin = {
   data(){
     return{
-      teacher:{}
+      teacher:{},
+      userinfo:{}
     }
   },
   created(){
@@ -33,7 +34,8 @@ export const powerMiXin = {
       }
     },
     getTeacher(){
-     this.teacher = dataMethod.getLocalData("teacher");
+     this.teacher =getLocalData("teacher");
+     this.userinfo=getLocalData("user")?getLocalData("user")[0]:{};
     }
   }
 };

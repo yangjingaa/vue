@@ -26,8 +26,9 @@ export const login = (data) => {
 
 //获取老师列表
 
-export const getTeacherList = () => {
-  return Axios.get("/teacher")
+export const getTeacherList = (data={}) => {
+  const url="/teacher"+urlSplice(data);
+  return Axios.get(url)
     .then(res => {
       return resultCheck(res)
     })
@@ -55,8 +56,13 @@ export const confirmTeacher = (data) => {
 
 //获取学生列表
 
-export const getStudentList = () => {
-  return Axios.get("/student")
+export const getStudentList = (data={}) => {
+  const url="/student"+urlSplice(data);
+  console.log(data);
+  return Axios.get(url)
+    .then(res => {
+      return resultCheck(res)
+    })
 };
 
 //获取课程列表
@@ -200,10 +206,20 @@ export const recoveryteUser=(data)=>{
 };
 /**
  * 筛选课程
- * @param  data 
+ * @param  data
  */
 export const screenTable=(data)=>{
   return Axios.post("/screenTable",data)
+  .then(res=>{
+    return resultCheck(res)
+  })
+}
+/**
+ * 
+ * @param {提升老师授课 水平} data 
+ */
+export const upLectureGrad=(data)=>{
+  return Axios.post("/upLectureGrad",data)
   .then(res=>{
     return resultCheck(res)
   })

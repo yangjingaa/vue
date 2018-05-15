@@ -6,9 +6,9 @@
           <!--<router-link :to="{name:'courseList'}" tag="li">老师开课记录</router-link>-->
           <router-link v-if="power" :to="{name:'course'}" tag="li">课程列表</router-link>
           <!--<router-link :to="{name:''}" tag="li">工资单</router-link>-->
-          <router-link :to="{name:'openCourse'}" tag="li">开课管理</router-link>
+          <router-link v-if="!power" :to="{name:'openCourse'}" tag="li">{{$t("message.left.StartClass")}}</router-link>
           <router-link v-if="power" :to="{name:'teacher'}" tag="li">老师管理</router-link>
-          <router-link v-if="!power" :to="{name:'personal'}" tag="li">个人信息</router-link>
+          <router-link v-if="!power" :to="{name:'personal'}" tag="li">{{$t("message.left.personalInfo")}}</router-link>
           <router-link v-if="power" :to="{name:'applicationTeacher'}" tag="li">老师申请</router-link>
           <router-link v-if="power" :to="{name:'userList'}" tag="li">用户列表</router-link>
         </ul>
@@ -17,7 +17,9 @@
     </div>
     <div class="right">
       <div class="rightHead">
-        <router-link to="home" tag="span" class="name">{{user.name}}</router-link>
+        <span class="name">{{user.name}}</span>
+        <el-button v-if="!power" type="primary" @click="langeChange('cn')">中文</el-button>
+        <el-button v-if="!power" type="primary" @click="langeChange('en')">Englist</el-button>
         <el-button type="warning" @click="signOut">退出</el-button>
       </div>
       <div class="contentBox">
@@ -29,6 +31,7 @@
 
 <script>
 import { requestMethod, dataMethod } from "../../../service/index";
+import { mapGetters,mapMutations } from "vuex";
 export default {
     name: "home",
     data() {
@@ -40,7 +43,9 @@ export default {
         this.automaticLogon();
     },
     mounted() {},
-    computed: {},
+    computed: {
+      
+    },
     methods: {
         signOut() {
             dataMethod.clearLocalData();
@@ -53,7 +58,16 @@ export default {
                 this.$router.push("/login");
             }
         },
-     
+        langeChange(data) {
+          if(data==="cn"){
+            this.set_lange(false);
+          }else{
+            this.set_lange(true);
+          }
+            this.$i18n.locale = data;
+            window.localStorage.setItem("language", data);
+        },
+        ...mapMutations(["set_lange"])
     },
     components: {},
     watch: {}

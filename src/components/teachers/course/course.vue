@@ -11,7 +11,7 @@
       </div>
       <div class="input">
         <span>学生：</span>
-        <el-select v-model="studentsId" multiple placeholder="请选择老师">
+        <el-select v-model="studentsId" multiple placeholder="请选择学生">
           <el-option v-for="item in studentData" :key="item._id" :label="item.name" :value="item._id">
           </el-option>
         </el-select>
@@ -64,6 +64,7 @@
             <span>{{scope.row.date|dateFilter}}</span>
           </template>
         </el-table-column>
+        <el-table-column label="课程名字" prop="name" width="180"></el-table-column>
         <el-table-column label="老师" width="180">
           <template slot-scope="scope">
             <span class="courseName" @click="JumpPersonalInfo(scope.row.teacherId)">{{scope.row.teacherId.name}}&nbsp;</span>
@@ -155,8 +156,7 @@ export default {
         },
         getStudentList() {
             requestMethod.getStudentList().then(res => {
-                const data = res.data.data;
-
+                const data = res.data;
                 this.studentData = data;
             });
         },

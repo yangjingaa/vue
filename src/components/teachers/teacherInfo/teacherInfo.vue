@@ -15,31 +15,31 @@
             <div class="writeInfo">
               <span class="input">
                 <div class="font">名字：</div>
-                <el-input  :value="teacherInfo.name" placeholder="名字" />
+                <el-input :value="teacherInfo.name" placeholder="名字" />
               </span>
               <span class="input">
                 <div class="font">授课级别：</div>
-                <el-input  :value="teacherInfo.grade|grade" placeholder="授课级别" />
+                <el-input :value="teacherInfo.grade|grade" placeholder="授课级别" />
               </span>
               <span class="input">
                 <div class="font">年龄：</div>
-                <el-input  :value="teacherInfo.age" placeholder="" />
+                <el-input :value="teacherInfo.age" placeholder="" />
               </span>
               <span class="input">
                 <div class="font">email：</div>
-                <el-input  type="text" :value="teacherInfo.email" placeholder="年龄" />
+                <el-input type="text" :value="teacherInfo.email" placeholder="年龄" />
               </span>
               <span class="input">
                 <div class="font">地址：</div>
-                <el-input  type="text" :value="teacherInfo.address" placeholder="地址" />
+                <el-input type="text" :value="teacherInfo.address" placeholder="地址" />
               </span>
               <span class="input">
                 <div class="font">毕业院校：</div>
-                <el-input  type="text" :value="teacherInfo.graduateSchool" placeholder="毕业院校" />
+                <el-input type="text" :value="teacherInfo.graduateSchool" placeholder="毕业院校" />
               </span>
               <span class="input">
                 <div class="font">入职时间：</div>
-                <el-input  type="text" :value="teacherInfo.time|dateFilter" placeholder="毕业院校" />
+                <el-input type="text" :value="teacherInfo.time|dateFilter" placeholder="毕业院校" />
               </span>
             </div>
           </div>
@@ -54,10 +54,18 @@
           <div class="func">
             <el-button type="primary" icon="el-icon-edit" @click="openInformationSWrite">发送信息</el-button>
             <el-button type="danger" @click="dismiss">禁止授课</el-button>
-            <el-button type="danger" @click="dismiss">提升授课等级</el-button>
+          </div>
+          <div class="upGrade">
+            <span>改变授课等级：</span>
+            <el-select v-model="courseDataGrade" placeholder="课程等级">
+              <el-option v-for="item in grade" :key="item.id" :label="item.name" :value="item.id">
+              </el-option>
+            </el-select>
+            <span>
+              <el-button type="primaryp" @click="upLectureGrad">确定</el-button>
+            </span>
           </div>
           <el-collapse v-model="activeNames" @change="handleChange">
-
             <el-collapse-item title="信息" name="1" class="warning-content">
               <div v-for="(item,index) in warnMessage" :key="index" class="warning">
                 <div class="warning-top">{{item.date|dateFilter}}
@@ -81,7 +89,7 @@
         </el-table-column>
         <el-table-column label="老师" width="180">
           <template slot-scope="scope">
-            <span >{{scope.row.teacherId.name}}&nbsp;</span>
+            <span>{{scope.row.teacherId.name}}&nbsp;</span>
           </template>
         </el-table-column>
         <el-table-column label="学生">
@@ -103,6 +111,7 @@
 <script>
 import { requestMethod } from "../../../service/index";
 import { getLocalData } from "../../../service/tools";
+import { StatusCode } from "../../../public/message/index";
 
 import { mapState, mapMutations, mapGetters } from "vuex";
 
@@ -115,7 +124,9 @@ export default {
             activeNames: "1",
             teacherId: this.$route.params.id,
             warnMessage: [],
-            teacherInfo: {}
+            teacherInfo: {},
+            grade: StatusCode.GRADE,
+            courseDataGrade:null,
         };
     },
     created() {
@@ -138,7 +149,7 @@ export default {
         // 获得课程列表
         getCourseList() {
             const teacherId = this.teacherId;
-            const data =  teacherId ;
+            const data = { teacherId };
             requestMethod
                 .getCourseList(data)
                 .then(res => {
@@ -225,6 +236,24 @@ export default {
                 .catch(res => {
                     this.$message.error(res);
                 });
+        },
+        //提升老师授课等级
+        upLectureGrad() {
+          const{courseDataGrade}=this;
+          const teacherId = this.teacherId;
+          if(courseDataGrade||courseDataGrade===0){
+            const data={
+              _id:teacherId,
+              grade:courseDataGrade
+            }
+             requestMethod.upLectureGrad(data)
+              .then(res=>{
+                this.$message.success(res.message)
+                this.teacherInfo = res.data[0];
+              }).catch(err=>{
+                this.$message.error(err);
+              })
+          }
         }
     },
     components: {},

@@ -45,6 +45,21 @@ export const scoreStatus=(score)=>{
 };
 
 /**
+ * 评价英文版
+ */
+
+export const scoreStatusEnglish=(score)=>{
+  const num=Number(score);
+  if(num>=0&&num<=5){
+    return "bad"
+  }else if(num<=10){
+    return "good"
+  }else {
+    return "great"
+  }
+};
+
+/**
  * 根据isAdmin 整理角色名称
  * @param num
  * @returns {string}

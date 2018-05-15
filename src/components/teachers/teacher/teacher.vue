@@ -2,7 +2,11 @@
   <div class="teacher-home">
     <div class="table">
       <el-table :data="teacherList" style="width: 100%" @row-click="tableSelectClick">
-        <el-table-column prop="name" label="姓名" width="180"></el-table-column>
+        <el-table-column prop="name" label="姓名" width="180">
+          <template slot-scope="scope">
+            <span class="courseName" @click="JumpPersonalInfo(scope.row._id)">{{scope.row.name}}&nbsp;</span>
+          </template>
+        </el-table-column>
         <el-table-column prop="age" label="年龄" width="180"></el-table-column>
         <el-table-column prop="email" label="email"></el-table-column>
         <el-table-column prop="address" label="地址"></el-table-column>
@@ -61,7 +65,14 @@
           .then(res=>{
 
           })
-      }
+      },
+      //跳转到老师信息页面
+        JumpPersonalInfo(_id) {
+            this.$router.push({
+                name: "teacherInfo",
+                params: { id: _id._id }
+            });
+        },
     },
     components: {},
     watch: {}
