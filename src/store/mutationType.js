@@ -6,3 +6,4 @@ export const set_name_array="set_name_array";
 export const set_teacher_info="set_teacher_info";
 export const set_user_info="set_user_info";
 export const set_lange="set_lange";
+export const set_resDate="set_resDate";

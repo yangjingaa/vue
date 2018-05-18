@@ -16,6 +16,9 @@ const mutation={
   [type.set_lange](state,value){
     state.lange=value;
   },
+  [type.set_resDate](state,value){
+    state.resDate=value;
+  },
 
   [type.set_user_info](state,userInfo){
     if(userInfo&& typeof userInfo === "object"){

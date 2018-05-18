@@ -5,6 +5,7 @@ const state={
   teacherInfo:{},
   userInfo:{},//所登录用户信息
   lange:false,
+  resDate:[],//预约时间
 };
 
 export default state;

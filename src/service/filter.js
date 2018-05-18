@@ -4,42 +4,42 @@
  * @returns {string}
  */
 
-export const dateFilter=(time,value)=>{
-  const date=new Date(parseInt(time));
-  let year=date.getFullYear();
+export const dateFilter = (time, value) => {
+  const date = new Date(parseInt(time));
+  let year = date.getFullYear();
 
-  let month=date.getMonth()+1;
-  let day=date.getDate();
-  let hours=date.getHours();
-  let minute=date.getMinutes();
-  if(month<10){
-    month="0"+month
+  let month = date.getMonth() + 1;
+  let day = date.getDate();
+  let hours = date.getHours();
+  let minute = date.getMinutes();
+  if (month < 10) {
+    month = "0" + month
   }
-  if(day<10){
-    day="0"+day
+  if (day < 10) {
+    day = "0" + day
   }
-  if(hours<10){
-    hours="0"+hours
+  if (hours < 10) {
+    hours = "0" + hours
   }
-  if(minute<10){
-    minute="0"+minute
+  if (minute < 10) {
+    minute = "0" + minute
   }
-  let str="";
-  if(value){
-    str=`${hours}:${minute}`
-  }else {
-    str=`${year}-${month}-${day} ${hours}:${minute}`;
+  let str = "";
+  if (value) {
+    str = `${hours}:${minute}`
+  } else {
+    str = `${year}-${month}-${day} ${hours}:${minute}`;
   }
   return str
 };
 
-export const scoreStatus=(score)=>{
-  const num=Number(score);
-  if(num>=0&&num<=5){
+export const scoreStatus = (score) => {
+  const num = Number(score);
+  if (num >= 0 && num <= 5) {
     return "差"
-  }else if(num<=10){
+  } else if (num <= 10) {
     return "良好"
-  }else {
+  } else {
     return "好"
   }
 };
@@ -48,13 +48,13 @@ export const scoreStatus=(score)=>{
  * 评价英文版
  */
 
-export const scoreStatusEnglish=(score)=>{
-  const num=Number(score);
-  if(num>=0&&num<=5){
+export const scoreStatusEnglish = (score) => {
+  const num = Number(score);
+  if (num >= 0 && num <= 5) {
     return "bad"
-  }else if(num<=10){
+  } else if (num <= 10) {
     return "good"
-  }else {
+  } else {
     return "great"
   }
 };
@@ -66,7 +66,7 @@ export const scoreStatusEnglish=(score)=>{
  */
 
 export const roleName = (num) => {
-  num=Number(num);
+  num = Number(num);
   if (num === 0) {
     return "超级管理员"
   } else if (num === 2) {
@@ -77,17 +77,31 @@ export const roleName = (num) => {
 };
 /**
  * 等级筛选
- * @param {} num 
+ * @param {} num
  */
-export const grade=(num)=>{
-  num=Number(num);
+export const grade = (num) => {
+  num = Number(num);
   if (num === 0) {
     return "初级"
   } else if (num === 1) {
     return "中级"
-  }else if (num === 2) {
+  } else if (num === 2) {
     return "高级"
   } else if (num === 3) {
     return "顶级"
   }
-}
+};
+
+
+export const evaluate = (num) => {
+  num = Number(num);
+  if (num === 0) {
+    return "差"
+  } else if (num === 1) {
+    return "一般"
+  } else if (num === 2) {
+    return "好"
+  } else if (num === 3) {
+    return "顶级"
+  }
+};

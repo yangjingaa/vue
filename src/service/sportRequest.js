@@ -222,3 +222,46 @@ export const buyCards=(data)=>{
       }
     )
 };
+/**
+ * 修改个人信息
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}getUserInfo
+ */
+
+export const changeInfo=(data)=>{
+  const url="/sport/changeInfo";
+  return Axios.post(url,data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 添加教练
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const addCoachSever=(data)=>{
+  const url="/sport/addCoach";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+
+/**
+ * 获得教练
+ * @param data
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export const getCoachSever=(data)=>{
+  const url="/sport/getCoach";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+};
+

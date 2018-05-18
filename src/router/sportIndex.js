@@ -7,6 +7,9 @@ const Register = () => import("components/sport/register/register");
 const Elements = () => import("components/sport/elements/elements");
 const Reservation = () => import("components/sport/reservation/reservation");
 const vipCard = () => import("components/sport/vipcard/vipcard");
+const personalInfo = () => import("components/sport/personalInfo/personalInfo");
+const coach = () => import("components/sport/coach/coach");
+const userManage = () => import("components/sport/userManage/userManage");
 
 
 Vue.use(Router);
@@ -46,6 +49,18 @@ export default new Router({
           path:"vipCard",
           name:"vipCard",
           component:vipCard
+        },{
+          path:"personalInfo",
+          name:"personalInfo",
+          component:personalInfo
+        },{
+          path:"coach",
+          name:"coach",
+          component:coach
+        },{
+          path:"userManage",
+          name:"userManage",
+          component:userManage
         }]
     },
   ]

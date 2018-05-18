@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="button">
-        <el-button type="primary" @click="showModel('reservation',equipmentItem,resDate)">预约</el-button>
+        <el-button type="primary" @click="showModel('reservation',equipmentItem)">预约</el-button>
         <el-button v-if="user.isAdmin===1" type="danger" icon="el-icon-delete" circle
                    @click="deleteEle(equipmentItem)"/>
         <span class="func-button">
@@ -32,6 +32,8 @@
 
 <script>
   import {sportMethod, dataMethod} from "../../service/index"
+  import {mapMutations} from "vuex"
+
   export default {
     name: "equ-box",
     props: {
@@ -40,13 +42,13 @@
     },
     data() {
       return {
-        startTime:"",
-        endTime:"",
-        resDate:[]
+        startTime: "",
+        endTime: "",
+        resDate: []
       }
     },
     created() {
-      this.getResTime();
+      // this.getResTime();
     },
     mounted() {
     },
@@ -85,34 +87,39 @@
           })
       },
 
-      showModel(key, value,resDate) {
-        this.$emit("showModel", key, value,resDate);
+      showModel(key, value) {
+        this.getResTime((data) => {
+          this.$emit("showModel", key, value, data);
+        })
+
+
       },
       image(value) {
         return `static/image/ele-image/${value}.jpg`
       },
-      getResTime(){
-        const _id=this.equipmentItem._id;
-        const data={
-          equId:_id,
+      getResTime(func) {
+        const _id = this.equipmentItem._id;
+        const data = {
+          equId: _id,
         };
         sportMethod.getResTime(data)
-          .then(res=>{
-            this.checkStamp(res.data);
+          .then(res => {
+            func(this.checkStamp(res.data))
           })
       },
-      //處理時間戳
-      checkStamp(data){
-        const time=[];
-        data.forEach(value =>{
-          let obj={
-            startTime:value.startTime,
-            endTime:value.endTime
+      //处理时间戳
+      checkStamp(data) {
+        const time = [];
+        data.forEach(value => {
+          let obj = {
+            startTime: value.startTime,
+            endTime: value.endTime
           };
           time.push(obj)
         });
-        this.resDate=time;
-      }
+        return time;
+      },
+      ...mapMutations(["set_resDate"])
     },
     components: {},
     watch: {}

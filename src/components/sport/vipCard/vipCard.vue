@@ -112,7 +112,12 @@
     },
     computed: {
       cardEditName() {
-        const name = this.edit ? "会员卡编辑" : "会员卡添加";
+        let name ="会员卡添加";
+        if(this.edit&&this.user.isAdmin===1){
+          name="会员卡编辑";
+        }else if(this.edit&&this.user.isAdmin!==1){
+          name="会员卡查看"
+        }
         return name
       },
       cardEditInfo() {
