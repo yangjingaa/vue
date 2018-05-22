@@ -29,22 +29,22 @@ const router=sportRouter;//健身房项目
 
 function lang () {
   // 将选择的语言存在localStorage中
-    let t = window.localStorage.getItem('language')
-    if (t) return t
+    let t = window.localStorage.getItem('language');
+    if (t) return t;
     // 默认中文
     else return 'cn'
   }
-   
-  const language = lang()
-   
+
+  const language = lang();
+
   // 自定义 window 的 lang 属性
-  window.lang = lang()
-   
+  window.lang = lang();
+
   // 创建一个 i18n 实例
   const i18n = new VueI18n({
     locale: language,    // 语言标识
     messages
-  })
+  });
 
 new Vue({
   el: '#app',
