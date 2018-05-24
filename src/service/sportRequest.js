@@ -264,4 +264,53 @@ export const getCoachSever=(data)=>{
       }
     )
 };
+/**
+ * 
+ * @param {添加课程} data 
+ */
+export const addCourse=(data)=>{
+  const url="/sport/addCourse";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+}
+/**
+ * 获得课程列表
+ * @param {*} data 
+ */
+export const getCourse=(data={})=>{
+  const url="/sport/getCourse";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+}
+/**
+ * 修改课程列表
+ * @param {*} data 
+ */
+export const editCourse=(data={})=>{
+  const url="/sport/editCourse";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+}
+
+/**
+ * 预约课程
+ * @param {*} data 
+ */
+export const resCourseList=(data={})=>{
+  const url="/sport/resCourseList";
+  return Axios.post(url, data)
+    .then(res => {
+        return resultCheck(res)
+      }
+    )
+}
 

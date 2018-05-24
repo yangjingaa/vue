@@ -5,11 +5,13 @@ export const powerMiXin = {
   data(){
     return{
       teacher:{},
-      userinfo:{}
+      userinfo:{},
+      userPrower: false,
     }
   },
   created(){
     this.getTeacher();
+    this.getPower();
   },
   computed: {
     power() {
@@ -35,7 +37,17 @@ export const powerMiXin = {
     },
     getTeacher(){
      this.teacher =getLocalData("teacher");
-     this.userinfo=getLocalData("user")?getLocalData("user")[0]:{};
+     if(this.teacher){
+      this.userinfo=getLocalData("user")?getLocalData("user")[0]:{};
+     }
+    },
+    getPower() {
+      const user = getLocalData("user") || "";
+      if (user.length>0&&Array.isArray(user)) {
+        if (user[0].isAdmin === 1) {
+          this.userPrower = true;
+        }
+      }
     }
   }
 };

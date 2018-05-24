@@ -11,27 +11,27 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane label="有氧训练" name="hasOxygen">
             <div class="ele-box"  v-if="activeName==='hasOxygen'">
-              <div class="ele-child" v-for=" item in equipment">
+              <div class="ele-child" :key="index" v-for=" (item,index) in equipment">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="组合力量" name="mobPower">
-            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='mobPower'">
+            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='mobPower'">
               <div class="ele-child">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="自由力量" name="freePower">
-            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='freePower'">
+            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='freePower'">
               <div class="ele-child">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="配重部分" name="weightPower">
-            <div class="ele-box" v-for=" item in equipment" v-if="item.type==='weightPower'">
+            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='weightPower'">
               <div class="ele-child">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
@@ -83,7 +83,7 @@
           <p style="color:red">注意事项：没人每天每个设备，只能预约一次</p>
           <div class="res-time"  v-if="resDate.length>0">
             <span class="spanss">已预约时间:</span>
-            <span v-for=" item in resDate">
+            <span v-for=" (item,index) in resDate" :key="index">
               {{item.startTime|dateFilter(true)}} - {{item.endTime|dateFilter(true)}}
             </span>
           </div>
@@ -289,12 +289,10 @@
 
       //删除设备
       deleteEquipment(value) {
-        console.log("删除");
         const {_id} = value;
         const data = {
           _id,
         };
-        console.log(data);
         sportMethod.deleteEquipment(data)
           .then(res => {
             this.$message.success(res.message);

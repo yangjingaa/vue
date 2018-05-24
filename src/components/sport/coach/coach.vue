@@ -4,7 +4,7 @@
       <el-button type="primary" icon="el-icon-edit" class="addCourse" @click="addCoachList">添加教练</el-button>
     </div>
     <div class="content">
-      <div class="coach-box" v-for="list in coachList">
+      <div class="coach-box" v-for="(list,index) in coachList" :key=index>
         <div class="info">
           <info :coachInfo=list @change="addCoachList"></info>
         </div>

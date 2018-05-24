@@ -6,7 +6,7 @@
     <div class="card-content" v-if="cardInfo">
       <el-tabs type="border-card" class="border-card" v-model="activeName"  @tab-click="handleClick">
         <el-tab-pane name="all" label="全部会员卡">
-          <div class="card-item" v-for="item in cardInfo">
+          <div class="card-item" v-for="(item,index) in cardInfo" :key="index">
             <div class="image">
               <img :src='cardImage(item.iName)' alt="">
               <div class="price">
@@ -30,7 +30,7 @@
           </div>
         </el-tab-pane>
         <el-tab-pane name="my" label="我的会员卡">
-          <div class="card-item" v-for="item in cardInfo">
+          <div class="card-item" v-for="(item,index) in cardInfo" :key="index">
             <div class="image">
               <img :src='cardImage(item.iName)' alt="">
               <div class="price">
@@ -153,7 +153,7 @@
         }
         sportMethod.getCard(data)
           .then(res => {
-            this.cardInfo = res.data;
+            this.cardInfo = res.data||{};
           })
           .catch(err => {
             this.$message.error(err)

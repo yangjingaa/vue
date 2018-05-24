@@ -10,6 +10,8 @@ const vipCard = () => import("components/sport/vipcard/vipcard");
 const personalInfo = () => import("components/sport/personalInfo/personalInfo");
 const coach = () => import("components/sport/coach/coach");
 const userManage = () => import("components/sport/userManage/userManage");
+const course = () => import("components/sport/course/course");
+
 
 
 Vue.use(Router);
@@ -61,6 +63,10 @@ export default new Router({
           path:"userManage",
           name:"userManage",
           component:userManage
+        },{
+          path:"course",
+          name:"course",
+          component:course
         }]
     },
   ]

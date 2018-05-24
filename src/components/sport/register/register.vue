@@ -2,31 +2,31 @@
   <div class="main">
     <div class="head">注册</div>
     <div class="input-value">
-      <div class="name">*用户名:</div><el-input type="text" placeholder="请输入用户名" v-model="userName"/>
+      <div class="name">*用户名:</div><el-input class="ad" type="text" placeholder="请输入用户名" v-model="userName"/>
     </div>
     <div class="input-value">
-      <div class="name">*请输入密码:</div><el-input type="password" placeholder="请输入密码" v-model="pwd"/>
+      <div class="name">*请输入密码:</div><el-input class="ad"  type="password" placeholder="请输入密码" v-model="pwd"/>
     </div>
     <div class="input-value">
-      <div class="name">*请确认密码:</div><el-input type="password" placeholder="请确认密码" v-model="repeatPwd"/>
+      <div class="name">*请确认密码:</div><el-input class="ad"   type="password" placeholder="请确认密码" v-model="repeatPwd"/>
     </div>
     <div class="input-value">
-      <div class="name">*名字:</div> <el-input type="text" placeholder="名字" v-model="name"/>
+      <div class="name">*名字:</div> <el-input class="ad"  type="text" placeholder="名字" v-model="name"/>
     </div>
     <div class="input-value">
-      <div class="name">身份证号码:</div><el-input type="number" placeholder="身份证号码" v-model="idCard"/>
+      <div class="name">身份证号码:</div><el-input class="ad"  type="number" placeholder="身份证号码" v-model="idCard"/>
     </div>
     <div class="input-value">
-      <div class="name">年龄:</div><el-input type="number" placeholder="年龄" v-model="age"/>
+      <div class="name">年龄:</div><el-input class="ad"  type="number" placeholder="年龄" v-model="age"/>
     </div>
     <div class="input-value">
-      <div class="name">email:</div><el-input type="email" placeholder="email" v-model="email"/>
+      <div class="name">email:</div><el-input class="ad"  type="email" placeholder="email" v-model="email"/>
     </div>
     <div class="input-value">
-      <div class="name">地址:</div><el-input type="text" placeholder="地址" v-model="address"/>
+      <div class="name">地址:</div><el-input class="ad"  type="text" placeholder="地址" v-model="address"/>
     </div>
     <div class="input-value">
-      <div class="name">手机号码:</div><el-input type="number" placeholder="手机号码" v-model="phoneNum"/>
+      <div class="name">手机号码:</div><el-input class="ad"  type="number" placeholder="手机号码" v-model="phoneNum"/>
     </div>
 
     <div class="footer">
