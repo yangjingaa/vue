@@ -123,6 +123,9 @@
           })
           .catch(err => this.$message.error(err))
       },
+      image(value) {
+        return `static/image/ele-image/${value}.jpg`
+      }
     },
     components: {
       info, log, Model

@@ -8,10 +8,10 @@
       <span class="name">教练：</span>
       <span class="value">{{courseList.coach.name}}</span>
     </div>
-    <div class="list">
+    <!-- <div class="list">
       <span class="name">上课地点：</span>
-      <span class="value">{{courseList.adress}}</span>
-    </div>
+      <span class="value">{{courseList.adress}}</span> -->
+    <!-- </div> -->
     <div class="list">
       <span class="name">最大预约人数：</span>
       <span class="value">{{courseList.maxNum}}</span>
@@ -20,6 +20,7 @@
       <span class="name">开课时间:</span>
       
       <el-date-picker
+      class="time"
       v-model="courseList.startTime"
       type="datetime"
       placeholder="选择开始时间"
@@ -27,6 +28,7 @@
       value-format="timestamp">
       </el-date-picker>
       <el-date-picker
+       class="time"
       v-model="courseList.endTime"
       type="datetime"
       disabled

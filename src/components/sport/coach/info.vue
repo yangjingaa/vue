@@ -2,7 +2,7 @@
   <div class="">
     <div class="coach-info">
       <div class="image-people">
-        <img src="../../../../static/image/card/chaoji.png"/>
+        <img src="../../../../static/image/coach/coach.jpg"/>
       </div>
       <div class="personalList">
         <div class="list">
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="button">
-      <el-button type="primary">预约教练</el-button>
+      <!-- <el-button type="primary">预约教练</el-button> -->
       <el-button type="primary">删除教练</el-button>
       <el-button type="primary" @click="changeCoachInfo">修改信息</el-button>
     </div>

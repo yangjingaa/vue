@@ -17,22 +17,22 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="组合力量" name="mobPower">
-            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='mobPower'">
-              <div class="ele-child">
+            <div class="ele-box" v-if="activeName==='mobPower'">
+              <div class="ele-child"  v-for=" (item,index) in equipment" :key="index" >
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="自由力量" name="freePower">
-            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='freePower'">
-              <div class="ele-child">
+            <div class="ele-box"  v-if="activeName==='freePower'">
+              <div class="ele-child" v-for=" (item,index) in equipment" :key="index">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>
           </el-tab-pane>
           <el-tab-pane label="配重部分" name="weightPower">
-            <div class="ele-box" v-for=" (item,index) in equipment" :key="index" v-if="item.type==='weightPower'">
-              <div class="ele-child">
+            <div class="ele-box" v-if="activeName==='weightPower'">
+              <div class="ele-child"  v-for=" (item,index) in equipment" :key="index">
                 <equBox :equipment-item="item" :user="user" @showModel="showModel" @getEquipment="getEquipment"/>
               </div>
             </div>

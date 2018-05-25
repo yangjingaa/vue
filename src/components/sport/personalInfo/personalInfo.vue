@@ -2,8 +2,8 @@
   <div class="personal">
     <el-tabs type="border-card" class="box">
       <el-tab-pane label="个人信息"><myInfo/></el-tab-pane>
-      <el-tab-pane label="我的预约"><reservation/></el-tab-pane>
-      <el-tab-pane label="我的课程"><myCourse/></el-tab-pane>
+      <el-tab-pane label="设备预约"><reservation/></el-tab-pane>
+      <el-tab-pane label="课程预约"><myCourse/></el-tab-pane>
     </el-tabs>
   </div>
 

@@ -2,7 +2,8 @@
 
     <div class="course">
         <div class="top">
-            <el-button type="danger" @click="showModel('addCourse')">添加课程{{userPrower}}</el-button>
+            <!-- {{userPrower}} -->
+            <el-button type="danger" @click="showModel('addCourse')">添加课程</el-button>
         </div>
         <hr>
         <div class="contents">
@@ -25,10 +26,10 @@
                         <span>教练名字</span>
                         <el-autocomplete style="width:440px" v-model="courseEdit.coach.name" :fetch-suggestions="findCoachSelect" placeholder="请输入内容" @select="handleCoachSelect"></el-autocomplete>
                     </div>
-                    <div class="addInput">
+                    <!-- <div class="addInput">
                         <span>上课地点</span>
                         <el-input type="text" v-model="courseEdit.adress" />
-                    </div>
+                    </div> -->
                     <div class="addInput">
                         <span>最大预约人数：</span>
                         <el-input type="text" v-model="courseEdit.maxNum" />

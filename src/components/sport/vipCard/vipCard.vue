@@ -13,10 +13,10 @@
                 名字：{{item.name}}
               </div>
               <div class="price">
-                优惠：{{item.discount}}/年
+                优惠：{{item.discount}}
               </div>
               <div class="price">
-                价格：<span>{{item.price}}</span>/年
+                价格：<span>{{item.price}}</span>
               </div>
               <div class="message">
                 介绍：{{item.message}}
@@ -37,10 +37,10 @@
                 名字：{{item.name}}
               </div>
               <div class="price">
-                优惠：{{item.discount}}/年
+                优惠：{{item.discount}}
               </div>
               <div class="price">
-                价格：<span>{{item.price}}</span>/年
+                价格：<span>{{item.price}}</span>
               </div>
               <div class="message">
                 介绍：{{item.message}}
@@ -65,11 +65,11 @@
             </div>
             <div class="addInput">
               <span>价格：</span>
-              <el-input v-model="editCard.price" placeholder="价格/年"/>
+              <el-input v-model="editCard.price" placeholder="价格"/>
             </div>
             <div class="addInput">
               <span>优惠：</span>
-              <el-input type="number" v-model="editCard.discount" placeholder="优惠金额/年"/>
+              <el-input type="number" v-model="editCard.discount" placeholder="优惠金额"/>
             </div>
             <div class="addInput">
               <span>图片背景：</span>

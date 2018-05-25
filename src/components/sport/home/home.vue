@@ -4,12 +4,12 @@
       <div class="head-left"><i class="el-icon-upload"> </i> 健身房管理系统</div>
       <div class="ulList">
         <ul class="list">
-          <router-link  :to="{name:'personalInfo'}" tag="li"><i class="el-icon-edit-outline"> </i> 我的</router-link>
+          <router-link  v-if="!userPrower" :to="{name:'personalInfo'}" tag="li"><i class="el-icon-edit-outline"> </i> 我的</router-link>
           <router-link  :to="{name:'vipCard'}" tag="li"><i class="el-icon-picture"> </i> 会员卡</router-link>
           <router-link  :to="{name:'course'}" tag="li"><i class="el-icon-time"> </i> 课程</router-link>
           <router-link  :to="{name:'elements'}" tag="li"><i class="el-icon-menu"> </i> 器材</router-link>
-          <router-link  :to="{name:'coach'}" tag="li"><i class="el-icon-edit-outline"> </i> 教练管理</router-link>
-          <router-link  :to="{name:'userManage'}" tag="li"><i class="el-icon-setting"> </i> 客户管理</router-link>
+          <router-link v-if="userPrower" :to="{name:'coach'}" tag="li"><i class="el-icon-edit-outline"> </i> 教练管理</router-link>
+          <router-link v-if="userPrower" :to="{name:'userManage'}" tag="li"><i class="el-icon-setting"> </i> 客户管理</router-link>
           <!--<router-link :to="{name:'applicationTeacher'}" tag="li">老师申请</router-link>-->
           <!--<router-link :to="{name:'userList'}" tag="li">用户列表</router-link>-->
         </ul>
