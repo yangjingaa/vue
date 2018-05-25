@@ -9,7 +9,7 @@
           <p>{{equipmentItem.name}}</p>
         </div>
         <div class="calories">
-          耗能量：{{equipmentItem.calories}}
+          耗能量：{{equipmentItem.calories}}/小时
         </div>
         <div class="message">
           {{equipmentItem.message}}

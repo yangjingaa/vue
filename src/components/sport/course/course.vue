@@ -187,8 +187,11 @@ export default {
                 sportMethod
                     .getCoachSever(findValue)
                     .then(result => {
-                        const detail = this.coachDetail(result.data);
-                        resolve(detail);
+                        if(result.data){
+                          const detail = this.coachDetail(result.data);
+                         resolve(detail);  
+                        }
+                        
                     })
                     .catch(err => {
                         this.$message.error(err);
