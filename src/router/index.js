@@ -6,7 +6,7 @@ const Home = () => import("components/teachers/home/index");
 const Teachers = () => import("components/teachers/teacher/teacher");
 const Course = () => import("components/teachers/course/course");
 const Register = () => import("components/teachers/register/index");
-const Personal = () => import("components/teachers/personal/index");
+const Personal = () => import("components/teachers/myInfo/index");
 const ApplicationTeacher=()=>import("components/teachers/applicationTeacher/applicationTeacher");
 const TeacherInfo=()=>import("components/teachers/teacherInfo/teacherInfo");
 const UserList=()=>import("components/teachers/userList/userList");

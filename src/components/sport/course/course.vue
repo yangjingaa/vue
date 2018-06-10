@@ -24,7 +24,13 @@
                     </div>
                     <div class="addInput">
                         <span>教练名字</span>
-                        <el-autocomplete style="width:440px" v-model="courseEdit.coach.name" :fetch-suggestions="findCoachSelect" placeholder="请输入内容" @select="handleCoachSelect"></el-autocomplete>
+                        <el-autocomplete 
+                            style="width:440px"
+                            v-model="courseEdit.coach.name" 
+                            :fetch-suggestions="findCoachSelect"
+                            placeholder="请输入内容" 
+                            @select="handleCoachSelect">
+                        </el-autocomplete>
                     </div>
                     <!-- <div class="addInput">
                         <span>上课地点</span>

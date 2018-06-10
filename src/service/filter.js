@@ -95,7 +95,7 @@ export const grade = (num) => {
 
 export const evaluate = (num) => {
   num = Number(num);
-  if (num === 0) {
+  if (num === c) {
     return "差"
   } else if (num === 1) {
     return "一般"
@@ -106,3 +106,14 @@ export const evaluate = (num) => {
   }
 };
 
+export const tuijian = (state) => {
+   if (state === "tijiao") {
+    return "已提交"
+  } else if (state === "chenggong") {
+    return "审核通过"
+  } else if (state === "shibai") {
+    return "审核未通过"
+  } else {
+    return "null"
+  }
+};

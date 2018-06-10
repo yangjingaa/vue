@@ -59,6 +59,8 @@
             }
             if(pwd!=repeatPwd){
               this.$message.error("密码不一致")
+              return false
+              
             }
             const data={
               userName,

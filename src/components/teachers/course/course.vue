@@ -3,24 +3,35 @@
     <div class="top" v-if="power">
       <p class="font">课程添加：</p>
       <div class="input">
+        <span>课程名字：</span>
+         <el-input v-model="courseName" placeholder="课程名字"></el-input>
+      </div>
+      <div class="input">
         <span>老师：</span>
-        <el-select v-model="teacherId" placeholder="请选择老师">
-          <el-option v-for="item in teacherData" :key="item._id._id" :label="item.name" :value="item._id._id">
-          </el-option>
-        </el-select>
+         <el-autocomplete 
+              v-model="search.addTeacher.value" 
+              :fetch-suggestions="findTeacherSelect"
+              placeholder="请输入内容"
+              @select="handleAddTeacher" 
+              >
+          </el-autocomplete>
       </div>
       <div class="input">
         <span>学生：</span>
-        <el-select v-model="studentsId" multiple placeholder="请选择学生">
-          <el-option v-for="item in studentData" :key="item._id" :label="item.name" :value="item._id">
-          </el-option>
-        </el-select>
+        <el-autocomplete 
+              v-model="search.addStudent.value" 
+              :fetch-suggestions="findStudentSelect"
+              placeholder="请选择学生"
+              @select="handleAddStudent" 
+              >
+          </el-autocomplete>
       </div>
       <div class="input">
         <span>时间：</span>
         <el-date-picker v-model="date" type="datetime" placeholder="请选择时间" value-format="timestamp">
         </el-date-picker>
       </div>
+      <br>
       <el-button type="primary" @click="addList">添加</el-button>
     </div>
     <!-- 查询 -->
@@ -29,17 +40,23 @@
         <p class="font">课程添加：</p>
         <div class="input">
           <span>老师：</span>
-          <el-select v-model="searchData.teacherId" clearable placeholder="请选择老师">
-            <el-option v-for="item in teacherData" :key="item._id._id" :label="item.name" :value="item._id._id">
-            </el-option>
-          </el-select>
+          <el-autocomplete 
+              v-model="search.shaiTeacher.value" 
+              :fetch-suggestions="findTeacherSelect"
+              placeholder="请输入内容"
+              @select="handleShaiTeacher" 
+              >
+          </el-autocomplete>
         </div>
         <div class="input">
           <span>学生：</span>
-          <el-select v-model="searchData.studentsId" multiple placeholder="请选择学生">
-            <el-option v-for="item in studentData" :key="item._id" :label="item.name" :value="item._id">
-            </el-option>
-          </el-select>
+          <el-autocomplete 
+              v-model="search.shaiStudent.value" 
+              :fetch-suggestions="findStudentSelect"
+              placeholder="请选择学生"
+              @select="handleShaiStudent" 
+              >
+          </el-autocomplete>
         </div>
         <div class="input">
           <span>评价：</span>
@@ -108,6 +125,15 @@ export default {
             teacherData: [],
             studentsId: [],
             studentData: [],
+            search:{
+              addTeacher:{},
+              addStudent:{},
+              shaiTeacher:{},
+              shaiStudent:{}
+            },
+            teacher:{},
+            student:{},
+            teacherName:"",
             date: "",
             tableData: null,
             searchData: {
@@ -129,13 +155,14 @@ export default {
             ],
             tablePagination: {
                 pageSize: 5
-            }
+            },
+            courseName:null,
         };
     },
     created() {
         this.userPower();
-        this.getTeacherList();
-        this.getStudentList();
+        // this.getTeacherList();
+        // this.getStudentList();
         this.screenTable();
     },
     mounted() {
@@ -149,16 +176,41 @@ export default {
                 this.$router.push({ name: "personal" });
             }
         },
-        getTeacherList() {
-            requestMethod.getTeacherList().then(res => {
-                this.teacherData = res.data;
+        getTeacherList(findQuery={}) {
+          return new Promise((resolve, reject) => {
+            requestMethod.getTeacherList(findQuery).then(res => {
+                if(res.data){
+                    const detail = this.coachDetail(res.data);
+                    resolve(detail);  
+                  }
+                
             });
+          })
+            
         },
-        getStudentList() {
-            requestMethod.getStudentList().then(res => {
-                const data = res.data;
-                this.studentData = data;
+        coachDetail(valueCoach) {
+            let coachDetail = [];
+            if (Array.isArray(valueCoach) && valueCoach.length > 0) {
+                valueCoach.forEach(value => {
+                    const list = {
+                        value: value.name,
+                        _id: value._id
+                    };
+                    coachDetail.push(list);
+                });
+            }
+            return coachDetail;
+        },
+        getStudentList(findQuery={}) {
+          return new Promise((resolve, reject) => {
+            requestMethod.getStudentList(findQuery).then(res => {
+                if(res.data){
+                    const detail = this.coachDetail(res.data);
+                    resolve(detail);  
+                  }
+                
             });
+          })
         },
         // getCourseList() {
         //     requestMethod.getCourseList().then(res => {
@@ -168,12 +220,16 @@ export default {
         //     });
         // },
         addList() {
-            const { teacherId, studentsId, date } = this;
+            const { search, date,courseName } = this;
+            const stuId=search.addStudent._id
             const data = {
-                teacherId,
+                teacherId:search.addTeacher._id._id||"",
                 date: new Date(date).getTime(),
-                studentsId
+                studentsId:[stuId],
+                name:courseName,
+                admin:true,
             };
+            
             requestMethod.addCourse(data).then(res => {
                 this.searchData = {};
                 this.screenTable();
@@ -192,6 +248,13 @@ export default {
         //筛选
         screenTable() {
             const { searchData } = this;
+            if(this.search.shaiTeacher._id){
+              searchData.teacherId=this.search.shaiTeacher._id._id
+            }
+            if(this.search.shaiStudent._id){
+              searchData.studentsId=[this.search.shaiStudent._id]
+            }
+            console.log(this.search);
             requestMethod
                 .screenTable(searchData)
                 .then(res => {
@@ -212,6 +275,50 @@ export default {
         tableChangeSize(value){
           this.searchData.pageSize=value;
           this.screenTable();
+        },
+        //动态查找老师
+        findTeacherSelect(query, cb) {
+            let findqQuery = {};
+            if (query) {
+                findqQuery = {
+                    name: query
+                };
+            }
+            this.getTeacherList(findqQuery)
+                .then(result => {
+                    cb(result);
+                })
+                .catch(err => {
+                  this.$message.error("err")
+                });
+        },
+        //动态查找学生
+        findStudentSelect(query, cb) {
+            let findqQuery = {};
+            if (query) {
+                findqQuery = {
+                    name: query
+                };
+            }
+            this.getStudentList(findqQuery)
+                .then(result => {
+                    cb(result);
+                })
+                .catch(err => {
+                  this.$message.error("err")
+                });
+        },
+        handleAddTeacher(value){
+              this.search.addTeacher=value
+        },
+        handleAddStudent(value){
+              this.search.addStudent=value
+        },
+        handleShaiTeacher(value){
+              this.search.shaiTeacher=value
+        },
+        handleShaiStudent(value){
+              this.search.shaiStudent=value
         },
         ...mapMutations(["set_teacher_info"]),
         ...mapActions(["timeChange"])

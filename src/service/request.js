@@ -1,12 +1,20 @@
 import Axios from "axios"
-import {StatusCode} from "../public/message/index"
-import {urlSplice} from "./tools"
+import {
+  StatusCode
+} from "../public/message/index"
+import {
+  urlSplice
+} from "./tools"
 
 //处理数据
 const resultCheck = (res) => {
   return new Promise((resolve, reject) => {
     if (res.data.status == 0) {
-      resolve(res.data)
+      if (res.data) {
+        resolve(res.data)
+      } else {
+        resolve(" ")
+      }
     }
     if (res.data.status == 1) {
       reject(res.data.message);
@@ -26,8 +34,8 @@ export const login = (data) => {
 
 //获取老师列表
 
-export const getTeacherList = (data={}) => {
-  const url="/teacher"+urlSplice(data);
+export const getTeacherList = (data = {}) => {
+  const url = "/teacher" + urlSplice(data);
   return Axios.get(url)
     .then(res => {
       return resultCheck(res)
@@ -35,11 +43,11 @@ export const getTeacherList = (data={}) => {
 };
 
 
-
 //获取申请老师列表
 
-export const getAppTeacherList = () => {
-  return Axios.get("/appTeacher")
+export const getAppTeacherList = (data = {}) => {
+  const url = "/appTeacher" + urlSplice(data);
+  return Axios.get(url)
     .then(res => {
       return resultCheck(res)
     })
@@ -56,8 +64,8 @@ export const confirmTeacher = (data) => {
 
 //获取学生列表
 
-export const getStudentList = (data={}) => {
-  const url="/student"+urlSplice(data);
+export const getStudentList = (data = {}) => {
+  const url = "/student" + urlSplice(data);
   console.log(data);
   return Axios.get(url)
     .then(res => {
@@ -68,7 +76,7 @@ export const getStudentList = (data={}) => {
 //获取课程列表
 
 export const getCourseList = (data = {}) => {
-  const url="/course"+urlSplice(data);
+  const url = "/course" + urlSplice(data);
   return Axios.get(url)
     .then(res => {
       return resultCheck(res)
@@ -107,18 +115,17 @@ export const addTeacher = (data) => {
 export const register = (data) => {
   return Axios.post("/register", data)
     .then(res => {
-        return resultCheck(res)
-      }
-    )
+      return resultCheck(res)
+    })
 };
 
 /**
  * 向老师发送警告
  */
-export const sendWarning=(data)=>{
-  if(data){
-    return Axios.post("/warning",data)
-      .then(res=>{
+export const sendWarning = (data) => {
+  if (data) {
+    return Axios.post("/warning", data)
+      .then(res => {
         return resultCheck(res)
       })
   }
@@ -129,12 +136,12 @@ export const sendWarning=(data)=>{
  * @param data
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const getWarningInfo=(data)=>{
-  if(data){
-    const url="/warning"+urlSplice(data);
+export const getWarningInfo = (data) => {
+  if (data) {
+    const url = "/warning" + urlSplice(data);
 
     return Axios.get(url)
-      .then(res=>{
+      .then(res => {
         return resultCheck(res)
       })
   }
@@ -146,11 +153,11 @@ export const getWarningInfo=(data)=>{
  * @returns {Promise<AxiosResponse<any>>}
  */
 
-export const dismissTeacher=(data)=>{
-  if(data){
+export const dismissTeacher = (data) => {
+  if (data) {
     console.log(data);
-    return Axios.post("/dismissTeacher",data)
-      .then(res=>{
+    return Axios.post("/dismissTeacher", data)
+      .then(res => {
         return resultCheck(res)
       })
   }
@@ -160,9 +167,9 @@ export const dismissTeacher=(data)=>{
  * @returns {Promise<AxiosResponse<any>>}
  */
 
-export const getUserList=()=>{
+export const getUserList = () => {
   return Axios.get("/userList")
-    .then(res=>{
+    .then(res => {
       return resultCheck(res)
     })
 };
@@ -173,9 +180,9 @@ export const getUserList=()=>{
  * @returns {Promise<AxiosResponse<any>>}
  */
 
-export const deleteUser=(data)=>{
-  return Axios.post("/deleteUser",data)
-    .then(res=>{
+export const deleteUser = (data) => {
+  return Axios.post("/deleteUser", data)
+    .then(res => {
       return resultCheck(res)
     })
 };
@@ -185,10 +192,10 @@ export const deleteUser=(data)=>{
  * @param data
  * @returns {Promise<AxiosResponse<any>>}
  */
-export const  getTeacherInfo=(data)=>{
-  const  url="/getTeacherInfo"+urlSplice(data);
+export const getTeacherInfo = (data) => {
+  const url = "/getTeacherInfo" + urlSplice(data);
   return Axios.get(url)
-    .then(res=>{
+    .then(res => {
       return resultCheck(res)
     })
 };
@@ -198,9 +205,9 @@ export const  getTeacherInfo=(data)=>{
  * @returns {Promise<AxiosResponse<any>>}
  */
 
-export const recoveryteUser=(data)=>{
-  return Axios.post("/recoveryteUser",data)
-    .then(res=>{
+export const recoveryteUser = (data) => {
+  return Axios.post("/recoveryteUser", data)
+    .then(res => {
       return resultCheck(res)
     })
 };
@@ -208,19 +215,62 @@ export const recoveryteUser=(data)=>{
  * 筛选课程
  * @param  data
  */
-export const screenTable=(data)=>{
-  return Axios.post("/screenTable",data)
-  .then(res=>{
-    return resultCheck(res)
-  })
+export const screenTable = (data) => {
+  return Axios.post("/screenTable", data)
+    .then(res => {
+      return resultCheck(res)
+    })
 }
 /**
- * 
- * @param {提升老师授课 水平} data 
+ *
+ * @param {提升老师授课 水平} data
  */
-export const upLectureGrad=(data)=>{
-  return Axios.post("/upLectureGrad",data)
-  .then(res=>{
-    return resultCheck(res)
-  })
+export const upLectureGrad = (data) => {
+  return Axios.post("/upLectureGrad", data)
+    .then(res => {
+      return resultCheck(res)
+    })
+}
+
+/**
+ *
+ * @param {推荐老师} data
+ */
+export const tuijianTeacher = (data) => {
+  return Axios.post("/tuijianTeacher", data)
+    .then(res => {
+      return resultCheck(res)
+    })
+}
+
+/**
+ *
+ * @param {获得推荐的老师} data
+ */
+export const getTuiJianTeacher = (data) => {
+  return Axios.post("/getTuiJianTeacher", data)
+    .then(res => {
+      return resultCheck(res)
+    })
+}
+/**
+ *
+ * @param {审核推荐老师} data
+ */
+export const createTuijianTeacher = (data) => {
+  return Axios.post("/createTuijianTeacher", data)
+    .then(res => {
+      return resultCheck(res)
+    })
+}
+
+/**
+ * getTuijianList 获得推荐老师列表
+ */
+
+export const getTuijianList = (data) => {
+  return Axios.post("/getTuijianList", data)
+    .then(res => {
+      return resultCheck(res)
+    })
 }

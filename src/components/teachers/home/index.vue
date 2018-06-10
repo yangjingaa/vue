@@ -6,7 +6,7 @@
           <!--<router-link :to="{name:'courseList'}" tag="li">老师开课记录</router-link>-->
           <router-link v-if="power" :to="{name:'course'}" tag="li">课程列表</router-link>
           <!--<router-link :to="{name:''}" tag="li">工资单</router-link>-->
-          <router-link v-if="!power" :to="{name:'openCourse'}" tag="li">{{$t("message.left.StartClass")}}</router-link>
+          <router-link v-if="isTeacher" :to="{name:'openCourse'}" tag="li">{{$t("message.left.StartClass")}}</router-link>
           <router-link v-if="power" :to="{name:'teacher'}" tag="li">老师管理</router-link>
           <router-link v-if="!power" :to="{name:'personal'}" tag="li">{{$t("message.left.personalInfo")}}</router-link>
           <router-link v-if="power" :to="{name:'applicationTeacher'}" tag="li">老师申请</router-link>
@@ -44,7 +44,9 @@ export default {
     },
     mounted() {},
     computed: {
-      
+      isTeacher(){
+        return this.userIsTeacher()
+      }
     },
     methods: {
         signOut() {

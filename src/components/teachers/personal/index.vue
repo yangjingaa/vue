@@ -1,5 +1,5 @@
 <template>
-  <div class="personal-main">
+  <div class="personal-mn">
     <div class="top">
       <h1>{{$t("message.personalInfo.titie")}}</h1>
     </div>

@@ -17,6 +17,9 @@ export const powerMiXin = {
     power() {
       return getLocalData("user")[0].isAdmin === 0
     },
+    youke(){
+      return getLocalData("user")[0].isAdmin === 1
+    },
     teacherPower(){
       return getLocalData("user")[0].isAdmin === 2
     },
