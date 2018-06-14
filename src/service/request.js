@@ -46,8 +46,8 @@ export const getTeacherList = (data = {}) => {
 //获取申请老师列表
 
 export const getAppTeacherList = (data = {}) => {
-  const url = "/appTeacher" + urlSplice(data);
-  return Axios.get(url)
+  const url = "/appTeacher" ;
+  return Axios.post(url,data)
     .then(res => {
       return resultCheck(res)
     })
@@ -76,8 +76,8 @@ export const getStudentList = (data = {}) => {
 //获取课程列表
 
 export const getCourseList = (data = {}) => {
-  const url = "/course" + urlSplice(data);
-  return Axios.get(url)
+  const url = "/screenTable" ;
+  return Axios.post(url,data)
     .then(res => {
       return resultCheck(res)
     })

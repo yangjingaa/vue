@@ -91,6 +91,7 @@ export default {
             requestMethod
                 .getTeacherList(data)
                 .then(res => {
+                  console.log(res)
                     if (res.data.length > 0) {
                         this.teacherInfo = res.data[0];
                     }

@@ -11,7 +11,10 @@
         </el-table-column>
         <el-table-column label="用户名" prop="userName" width="180">
         </el-table-column>
-        <el-table-column label="名字" prop="name">
+        <el-table-column label="名字"  prop="name">
+          <template slot-scope="scope">
+            <span class="courseName" @click="JumpPersonalInfo(scope.row)">{{scope.row.name}}&nbsp;</span>
+          </template>
         </el-table-column>
         <el-table-column label="角色" width="180">
           <template slot-scope="scope">
@@ -34,6 +37,7 @@
 <script>
   import {requestMethod} from "../../../service/index"
   import {getLocalData} from "../../../service/tools"
+  import { mapState, mapMutations, mapActions } from "vuex";
 
   export default {
     name: "user-list",
@@ -86,7 +90,19 @@
           .catch(err=>{
             this.$message.error(err)
           })
-      }
+      },
+      //跳转到老师信息页面
+      JumpPersonalInfo(teacher) {
+        this.set_teacher_info(teacher);
+        this.timeChange();
+        const teacherId = teacher._id;
+        this.$router.push({
+          name: "teacherInfo",
+          params: { id: teacherId }
+        });
+      },
+      ...mapMutations(["set_teacher_info"]),
+      ...mapActions(["timeChange"])
     },
     components: {},
     watch: {}

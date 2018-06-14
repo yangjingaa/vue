@@ -60,7 +60,7 @@
             {{scope.row.state|tuijian}}
           </template>
         </el-table-column>
-        
+
       </el-table>
     </div>
   </div>
@@ -81,7 +81,7 @@ export default {
     },
     mounted() {
       this.getTuijianList()
-      
+
     },
     computed: {},
     methods: {
@@ -91,16 +91,14 @@ export default {
             requestMethod
                 .tuijianTeacher(tuijianData)
                 .then(result => {
-                    console.log(result);
                     this.$message.success(result.message);
+                    this.getTuijianList();
                 })
                 .catch(err => {
                     this.$message.error(err);
                 });
         },
         getTuijianList(){
-          
-          
           let finfQuery={
             tuijian:this.userinfo._id
           };

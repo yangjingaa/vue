@@ -69,8 +69,10 @@ export const roleName = (num) => {
   num = Number(num);
   if (num === 0) {
     return "超级管理员"
+  } else if (num === 1) {
+    return "老师"
   } else if (num === 2) {
-    return "用户"
+    return "游客"
   } else if (num === 100) {
     return "被辞退"
   }
@@ -117,3 +119,16 @@ export const tuijian = (state) => {
     return "null"
   }
 };
+
+export const appTeacher = (state) => {
+  if (state === 0) {
+    return "未审核"
+  } else if (state === 1) {
+    return "审核通过"
+  } else if (state === 2) {
+    return "审核未通过"
+  } else {
+    return "null"
+  }
+};
+

@@ -8,21 +8,21 @@
       </div>
       <div class="input">
         <span>老师：</span>
-         <el-autocomplete 
-              v-model="search.addTeacher.value" 
+         <el-autocomplete
+              v-model="search.addTeacher.value"
               :fetch-suggestions="findTeacherSelect"
               placeholder="请输入内容"
-              @select="handleAddTeacher" 
+              @select="handleAddTeacher"
               >
           </el-autocomplete>
       </div>
       <div class="input">
         <span>学生：</span>
-        <el-autocomplete 
-              v-model="search.addStudent.value" 
+        <el-autocomplete
+              v-model="search.addStudent.value"
               :fetch-suggestions="findStudentSelect"
               placeholder="请选择学生"
-              @select="handleAddStudent" 
+              @select="handleAddStudent"
               >
           </el-autocomplete>
       </div>
@@ -40,21 +40,21 @@
         <p class="font">课程添加：</p>
         <div class="input">
           <span>老师：</span>
-          <el-autocomplete 
-              v-model="search.shaiTeacher.value" 
+          <el-autocomplete
+              v-model="search.shaiTeacher.value"
               :fetch-suggestions="findTeacherSelect"
               placeholder="请输入内容"
-              @select="handleShaiTeacher" 
+              @select="handleShaiTeacher"
               >
           </el-autocomplete>
         </div>
         <div class="input">
           <span>学生：</span>
-          <el-autocomplete 
-              v-model="search.shaiStudent.value" 
+          <el-autocomplete
+              v-model="search.shaiStudent.value"
               :fetch-suggestions="findStudentSelect"
               placeholder="请选择学生"
-              @select="handleShaiStudent" 
+              @select="handleShaiStudent"
               >
           </el-autocomplete>
         </div>
@@ -100,14 +100,14 @@
         </el-table-column>
       </el-table>
 
-      <el-pagination 
-      class="pagination" 
-      background 
-      @current-change="tableChanePage" 
+      <el-pagination
+      class="pagination"
+      background
+      @current-change="tableChanePage"
       @size-change="tableChangeSize"
-      :page-sizes="[5, 10, 15, 20, 25, 30]" 
-      :page-size="tablePagination.pageSize" 
-      layout="sizes, prev, pager, next" 
+      :page-sizes="[5, 10, 15, 20, 25, 30]"
+      :page-size="tablePagination.pageSize"
+      layout="sizes, prev, pager, next"
       :total="tablePagination.count">
       </el-pagination>
     </div>
@@ -166,7 +166,7 @@ export default {
         this.screenTable();
     },
     mounted() {
-        
+
     },
     computed: {},
     methods: {
@@ -181,12 +181,12 @@ export default {
             requestMethod.getTeacherList(findQuery).then(res => {
                 if(res.data){
                     const detail = this.coachDetail(res.data);
-                    resolve(detail);  
+                    resolve(detail);
                   }
-                
+
             });
           })
-            
+
         },
         coachDetail(valueCoach) {
             let coachDetail = [];
@@ -206,9 +206,9 @@ export default {
             requestMethod.getStudentList(findQuery).then(res => {
                 if(res.data){
                     const detail = this.coachDetail(res.data);
-                    resolve(detail);  
+                    resolve(detail);
                   }
-                
+
             });
           })
         },
@@ -221,7 +221,7 @@ export default {
         // },
         addList() {
             const { search, date,courseName } = this;
-            const stuId=search.addStudent._id
+            const stuId=search.addStudent._id;
             const data = {
                 teacherId:search.addTeacher._id._id||"",
                 date: new Date(date).getTime(),
@@ -229,11 +229,17 @@ export default {
                 name:courseName,
                 admin:true,
             };
-            
+
             requestMethod.addCourse(data).then(res => {
-                this.searchData = {};
-                this.screenTable();
+                this.$message.success("添加成功");
+                this.searchData={
+                  pageSize:5
+                };
+                // this.screenTable(true);
             });
+            setTimeout(()=>{
+              this.screenTable(true);
+            },500)
         },
         //跳转到老师信息页面
         JumpPersonalInfo(teacher) {
@@ -246,16 +252,22 @@ export default {
             });
         },
         //筛选
-        screenTable() {
+        screenTable(value) {
             const { searchData } = this;
-            if(this.search.shaiTeacher._id){
+            if(this.search.shaiTeacher.value){
               searchData.teacherId=this.search.shaiTeacher._id._id
+            }else if(searchData.teacherId) {
+              delete  searchData.teacherId
             }
-            if(this.search.shaiStudent._id){
+            if(this.search.shaiStudent.value){
               searchData.studentsId=[this.search.shaiStudent._id]
+            }else if(searchData.studentsId) {
+              delete  searchData.studentsId
             }
-            console.log(this.search);
-            requestMethod
+            if(searchData.pageNumer&&value){
+              searchData.pageNumer=1
+            }
+          requestMethod
                 .screenTable(searchData)
                 .then(res => {
                     const count = res.count;

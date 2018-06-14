@@ -12,6 +12,16 @@
         <el-table-column prop="address" label="地址"></el-table-column>
         <el-table-column prop="graduateSchool" label="毕业院校"></el-table-column>
       </el-table>
+      <el-pagination
+        class="pagination"
+        background
+        @current-change="tableChanePageShen"
+        @size-change="tableChangeSizeShen"
+        :page-sizes="[5, 10, 15, 20, 25, 30]"
+        :page-size="tableShenHe.pageSize"
+        layout="sizes, prev, pager, next"
+        :total="tableShenHe.count">
+      </el-pagination>
     </div>
   </div>
 
@@ -31,6 +41,9 @@
         email:null,
         address:null,
         graduateSchool:null,
+        tableShenHe:{
+          pageSize: 5
+        }
       }
     },
     created() {
@@ -43,10 +56,18 @@
     methods: {
       //获得老师列表
       getTeacherList() {
-        requestMethod.getTeacherList()
+        const findData={
+          pageSize: this.tableShenHe.pageSize,
+          pageNumer:this.tableShenHe.pageNumer||1
+        };
+        requestMethod.getTeacherList(findData)
           .then((res) => {
               this.teacherList = res.data;
-          }).catch()
+              this.tableShenHe.count=res.count;
+          }).catch((err)=>{
+            this.$message.error(err)
+          }
+        )
       },
       //表格行被点击
       tableSelectClick(row) {
@@ -73,6 +94,15 @@
                 params: { id: _id._id }
             });
         },
+      tableChanePageShen(value) {
+        this.tableShenHe.pageNumer = value;
+        this.getTeacherList();
+      },
+      //table 改变当前显示数量
+      tableChangeSizeShen(value){
+        this.tableShenHe.pageSize=value;
+        this.getTeacherList();
+      },
     },
     components: {},
     watch: {}
@@ -80,5 +110,5 @@
 </script>
 
 <style lang="stylus" scoped>
-  @import "teacher.styl"
+  @import "./teacher.styl"
 </style>

@@ -4,6 +4,12 @@
       <div class="font">
         <p>教师审核：</p>
       </div>
+      <div class="tiaojian">
+        <el-button type="primary" :disabled="appTeacherState===0" @click="appScreenList(0)">未审核</el-button>
+        <el-button type="primary" :disabled="appTeacherState===1" @click="appScreenList(1)">审核成功
+        </el-button>
+        <el-button type="primary" :disabled="appTeacherState===2" @click="appScreenList(2)">审核失败</el-button>
+      </div>
       <div class="table">
         <el-table :data="tableData" style="width: 100%">
           <el-table-column prop="name" label="老师"/>
@@ -12,11 +18,17 @@
           <el-table-column prop="time" label="申请时间"/>
           <el-table-column prop="graduateSchool" label="学校"/>
           <el-table-column prop="address" label="地址"/>
-
-
-          <el-table-column label="操作">
+          <el-table-column  label="审核状态">
             <template slot-scope="scope">
-              <el-button @click="confirmTeacher(scope.row)">确认审核</el-button>
+              {{scope.row.state|appTeacher}}
+            </template>
+          </el-table-column>
+          <el-table-column label="操作" width="250px">
+            <template slot-scope="scope">
+              <div class="button">
+              <el-button @click="confirmTeacher(scope.row,1)">确认审核</el-button>
+              <el-button @click="confirmTeacher(scope.row,2)">审核不通过</el-button>
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -65,6 +77,7 @@
               {{scope.row.state|tuijian}}
             </template>
           </el-table-column>
+          <el-table-column prop="liyou" label="推荐理由"></el-table-column>
           <el-table-column label="操作" width="250px">
             <template slot-scope="scope">
               <div class="button">
@@ -105,7 +118,8 @@
         },
         tableShenHe:{
           pageSize: 5
-        }
+        },
+        appTeacherState:0
       };
     },
     created() {
@@ -119,6 +133,7 @@
       getAppTeacherList() {
         const findData = {
           pageSize: this.tableShenHe.pageSize,
+          state:this.appTeacherState,
         };
         requestMethod
           .getAppTeacherList(findData)
@@ -133,10 +148,11 @@
             });
           });
       },
-      confirmTeacher(value) {
+      confirmTeacher(value,state) {
         const _id = value._id;
         const data = {
-          _id
+          _id,
+          state:state,
         };
         requestMethod
           .confirmTeacher(data)
@@ -200,6 +216,10 @@
       screenList(value) {
         this.tuijianState = value;
         this.getTuiJianTeacher();
+      },
+      appScreenList(value) {
+        this.appTeacherState = value;
+        this.getAppTeacherList();
       }
     },
     components: {},
